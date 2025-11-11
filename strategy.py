@@ -68,6 +68,8 @@ class MortyRescueStrategy(ABC):
         pass
 
 
+# Choisit la planète avec le meilleur taux de survie moyen pendant l’exploration, et y envoie tous les Morties.
+# Ne s’adapte pas aux changements (si la planète devient dangereuse)
 class SimpleGreedyStrategy(MortyRescueStrategy):
     """
     Simple greedy strategy: always pick the planet with highest recent success.
@@ -123,6 +125,8 @@ class SimpleGreedyStrategy(MortyRescueStrategy):
         print(f"Success Rate: {(final_status['morties_on_planet_jessica']/1000)*100:.2f}%")
 
 
+# Re-évalue tous les N voyages (reevaluate_every), mais ne change pas encore réellement de planète.
+# Le changement de planète n’est pas implémenté.
 class AdaptiveStrategy(MortyRescueStrategy):
     """
     Adaptive strategy: continuously monitor and switch planets if needed.
@@ -203,6 +207,53 @@ class AdaptiveStrategy(MortyRescueStrategy):
         print(f"Success Rate: {(final_status['morties_on_planet_jessica']/1000)*100:.2f}%")
 
 
+
+
+# Change de planète si la survie moyenne des 50 derniers voyages chute de plus de X %.
+class TrendSwitchStrategy(MortyRescueStrategy):
+    def execute_strategy(self, morties_per_trip=2, reevaluate_every=50, drop_threshold=0.2):
+        print("\n=== EXECUTING TREND-SWITCH STRATEGY ===")
+        
+        status = self.client.get_status()
+        morties_remaining = status['morties_in_citadel']
+        
+        current_planet, current_planet_name = self.collector.get_best_planet(
+            self.exploration_data,
+            consider_trend=True
+        )
+        print(f"Starting on planet: {current_planet_name}")
+
+        recent_results = []
+        total_trips = 0
+
+        while morties_remaining > 0:
+            morties_to_send = min(morties_per_trip, morties_remaining)
+            result = self.client.send_morties(current_planet, morties_to_send)
+            morties_remaining = result['morties_in_citadel']
+
+            recent_results.append(result['survived'])
+            total_trips += 1
+
+            if total_trips % reevaluate_every == 0 and morties_remaining > 0:
+                recent_success = sum(recent_results[-reevaluate_every:]) / reevaluate_every
+                print(f"Trip {total_trips}: success rate {recent_success*100:.2f}%")
+
+                # Si la performance baisse trop, on re-choisit une planète
+                if recent_success < (1 - drop_threshold):
+                    print("  ⚠️ Performance drop detected! Re-evaluating best planet...")
+                    current_planet, current_planet_name = self.collector.get_best_planet(
+                        self.exploration_data,
+                        consider_trend=True
+                    )
+                    print(f"  → Switching to planet: {current_planet_name}")
+
+        final_status = self.client.get_status()
+        print("\n=== FINAL RESULTS ===")
+        print(f"Morties Saved: {final_status['morties_on_planet_jessica']}")
+        print(f"Morties Lost: {final_status['morties_lost']}")
+        print(f"Success Rate: {(final_status['morties_on_planet_jessica']/1000)*100:.2f}%")
+
+
 def run_strategy(strategy_class, explore_trips: int = 30):
     """
     Run a complete strategy from exploration to execution.
@@ -253,3 +304,4 @@ if __name__ == "__main__":
     
     # Uncomment to run:
     # run_strategy(AdaptiveStrategy, explore_trips=30)
+

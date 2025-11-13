@@ -52,7 +52,7 @@ def main():
     
     # Explore each planet with a smaller number of trips for the example
     # You can increase trips_per_planet for more data
-    df = collector.explore_all_planets(trips_per_planet=30, morty_count=1)
+    df = collector.explore_all_planets(trips_per_planet=335, morty_count=1)
     
     # Step 4: Analyze the data
     print("\n4. Analyzing collected data...")

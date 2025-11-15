@@ -271,36 +271,82 @@ if __name__ == "__main__":
         collector = DataCollector(client)
         print("✅ Data Collector initialized!\n")
 
-        # Paramètres
-        trips_per_planet = 150      # nombre de trips par planète
-        morty_counts = [1, 2, 3]   # tester différents groupes de Mortys
-        planets = [0, 1, 2]        # toutes les planètes
+        trips_per_planet = 150
 
-        # Exploration et sauvegarde
-        for morty_count in morty_counts:
-            print(f"\n=== Exploring all planets with {morty_count} Morty(ies) ===\n")
-        
-            planet_dfs = []
+        # --- 1 Morty ---
+        print("\n=== Exploring all planets with 1 Morty ===\n")
+        planet_dfs_1 = []
 
-            for planet in planets:
-                # Explorer chaque planète
-                df = collector.explore_planet(planet, trips_per_planet, morty_count)
+        df0 = collector.explore_planet(0, trips_per_planet, morty_count=1)
+        if not df0.empty:
+            collector.save_data(morty_count=1, planet=0, df=df0)
+            planet_dfs_1.append(df0)
 
-                # Sauvegarder CSV de la planète uniquement si des trips ont réussi
-                if not df.empty:
-                    collector.save_data(morty_count=morty_count, planet=planet, df=df)
-                    planet_dfs.append(df)
-                else:
-                    print(f"⚠️ No successful trips for morty_count={morty_count} on planet {planet}, skipping CSV.")
+        df1 = collector.explore_planet(1, trips_per_planet, morty_count=1)
+        if not df1.empty:
+            collector.save_data(morty_count=1, planet=1, df=df1)
+            planet_dfs_1.append(df1)
 
-            # Combiner les DataFrames non vides pour ce nombre de Mortys
-            if planet_dfs:
-                combined_df = pd.concat(planet_dfs, ignore_index=True)
-                collector.save_data(morty_count=morty_count, planet=None, df=combined_df)
-            else:
-                print(f"⚠️ No data collected for morty_count={morty_count}, skipping combined CSV.")
+        df2 = collector.explore_planet(2, trips_per_planet, morty_count=1)
+        if not df2.empty:
+            collector.save_data(morty_count=1, planet=2, df=df2)
+            planet_dfs_1.append(df2)
 
-            print("\n✅ Exploration complete for this group! CSVs saved if data exists.\n")
+        if planet_dfs_1:
+            combined_1 = pd.concat(planet_dfs_1, ignore_index=True)
+            collector.save_data(morty_count=1, planet=None, df=combined_1)
+
+        print("\n✅ Exploration complete for 1 Morty!\n")
+
+        # --- 2 Mortys ---
+        print("\n=== Exploring all planets with 2 Mortys ===\n")
+        planet_dfs_2 = []
+
+        df0 = collector.explore_planet(0, trips_per_planet, morty_count=2)
+        if not df0.empty:
+            collector.save_data(morty_count=2, planet=0, df=df0)
+            planet_dfs_2.append(df0)
+
+        df1 = collector.explore_planet(1, trips_per_planet, morty_count=2)
+        if not df1.empty:
+            collector.save_data(morty_count=2, planet=1, df=df1)
+            planet_dfs_2.append(df1)
+
+        df2 = collector.explore_planet(2, trips_per_planet, morty_count=2)
+        if not df2.empty:
+            collector.save_data(morty_count=2, planet=2, df=df2)
+            planet_dfs_2.append(df2)
+
+        if planet_dfs_2:
+            combined_2 = pd.concat(planet_dfs_2, ignore_index=True)
+            collector.save_data(morty_count=2, planet=None, df=combined_2)
+
+        print("\n✅ Exploration complete for 2 Mortys!\n")
+
+        # --- 3 Mortys ---
+        print("\n=== Exploring all planets with 3 Mortys ===\n")
+        planet_dfs_3 = []
+
+        df0 = collector.explore_planet(0, trips_per_planet, morty_count=3)
+        if not df0.empty:
+            collector.save_data(morty_count=3, planet=0, df=df0)
+            planet_dfs_3.append(df0)
+
+        df1 = collector.explore_planet(1, trips_per_planet, morty_count=3)
+        if not df1.empty:
+            collector.save_data(morty_count=3, planet=1, df=df1)
+            planet_dfs_3.append(df1)
+
+        df2 = collector.explore_planet(2, trips_per_planet, morty_count=3)
+        if not df2.empty:
+            collector.save_data(morty_count=3, planet=2, df=df2)
+            planet_dfs_3.append(df2)
+
+        if planet_dfs_3:
+            combined_3 = pd.concat(planet_dfs_3, ignore_index=True)
+            collector.save_data(morty_count=3, planet=None, df=combined_3)
+
+        print("\n✅ Exploration complete for 3 Mortys!\n")
 
     except Exception as e:
         print(f"❌ Error: {e}")

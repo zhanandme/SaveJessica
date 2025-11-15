@@ -8,10 +8,11 @@ Goals:
 4. Visualize key relationships for strategy design
 """
 
+import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
+
 from api_client import SphinxAPIClient
 from data_collector import DataCollector
 from visualizations import (
@@ -22,30 +23,71 @@ from visualizations import (
     plot_episode_summary,
 )
 
+# -------------------------------------------------------
+# Folder creation
+# -------------------------------------------------------
+def ensure_dirs():
+    os.makedirs("outputs/figures", exist_ok=True)
+    os.makedirs("outputs/data", exist_ok=True)
 
+# -------------------------------------------------------
+# Figure saving helper
+# -------------------------------------------------------
+def savefig(name):
+    path = f"outputs/figures/{name}.png"
+    plt.savefig(path, dpi=200, bbox_inches="tight")
+    plt.close()
+    print(f"📁 figure saved → {path}")
+
+# -------------------------------------------------------
+# 1) Distribution survie par planète
+# -------------------------------------------------------
 def plot_survival_distribution(df):
-    """Distribution of survival rate per planet."""
     plt.figure(figsize=(10,6))
-    sns.kdeplot(data=df, x="survival_rate", hue="planet_name", fill=True, alpha=0.4)
-    plt.title("Distribution de la probabilité de survie par planète")
-    plt.xlabel("Taux de survie par voyage")
-    plt.ylabel("Densité")
-    plt.grid(alpha=0.3)
-    plt.show()
 
+    for planet in df["planet_name"].unique():
+        sub = df[df["planet_name"] == planet]
+        plt.hist(sub["survival_rate"], bins=20, alpha=0.4, label=planet)
 
+    plt.title("Distribution du taux de survie par planète")
+    plt.xlabel("Taux de survie")
+    plt.ylabel("Fréquence")
+    plt.legend()
+    savefig("distribution_survie")
+
+# -------------------------------------------------------
+# 2) Tradeoff survie ↔ rapidité
+# -------------------------------------------------------
 def plot_efficiency(df):
-    """Tradeoff between survival rate and travel time."""
     plt.figure(figsize=(8,6))
-    sns.scatterplot(data=df, x="steps_taken", y="survival_rate", hue="planet_name")
+
+    for planet in df["planet_name"].unique():
+        sub = df[df["planet_name"] == planet]
+        plt.scatter(sub["steps_taken"], sub["survival_rate"], alpha=0.5, label=planet)
+
     plt.title("Trade-off entre survie et rapidité")
-    plt.xlabel("Nombre de pas (steps_taken)")
+    plt.xlabel("Nombre de steps")
     plt.ylabel("Taux de survie")
     plt.grid(alpha=0.3)
-    plt.show()
+    plt.legend()
+    savefig("efficiency")
+
+# -------------------------------------------------------
+# Save CSVs
+# -------------------------------------------------------
+def save_dataframes(full_df, summary_df):
+    full_df.to_csv("outputs/data/exploration_data_ucb_ready.csv", index=False)
+    summary_df.to_csv("outputs/data/summary_planet_stats.csv", index=False)
+    print("📁 CSV saved in outputs/data/")
 
 
+# -------------------------------------------------------
+# MAIN SCRIPT
+# -------------------------------------------------------
 def main():
+
+    ensure_dirs()
+
     print("="*70)
     print("MORTY EXPRESS CHALLENGE - ADVANCED PLANET ANALYSIS (UCB READY)")
     print("="*70)
@@ -60,7 +102,7 @@ def main():
     result = client.start_episode()
     print(f"✓ Episode started — Morties in Citadel: {result['morties_in_citadel']}")
 
-    # Step 3: Explore planets with group sizes 1 and 3
+    # Step 3: Explore planets
     print("\n3️⃣ Exploring planets with group sizes = 1 and 3...")
     collector = DataCollector(client)
     dfs = []
@@ -73,11 +115,10 @@ def main():
         dfs.append(df)
 
     full_df = pd.concat(dfs, ignore_index=True)
-
     print("\n✅ Data collected!")
     print(full_df.head())
 
-    # Step 4: Compute extended statistics per planet
+    # Step 4: Statistics per planet
     print("\n4️⃣ Computing statistics per planet...")
 
     summary_rows = []
@@ -104,7 +145,7 @@ def main():
 
     summary_df = pd.DataFrame(summary_rows)
 
-    # Step 5: Compute UCB scores
+    # Step 5: UCB values
     print("\n5️⃣ Computing UCB scores...")
     total_trips = summary_df["trips"].sum()
     summary_df["UCB_value"] = summary_df["mean_survival_rate"] + \
@@ -112,7 +153,7 @@ def main():
 
     print(summary_df)
 
-    # Step 6: Risk analysis (from your collector)
+    # Step 6: Risk evolution
     print("\n6️⃣ Risk trend analysis...")
     risk_analysis = collector.analyze_risk_changes(full_df)
     for planet_name, data in risk_analysis.items():
@@ -121,15 +162,12 @@ def main():
         print(f"  Late Survival Rate:  {data['late_survival_rate']:.2f}%")
         print(f"  Trend: {data['trend']} ({data['change']:+.2f}%)")
 
-    # Step 7: Save enriched data
+    # Step 7: Save CSV
     print("\n7️⃣ Saving data for strategy training...")
-    full_df.to_csv("exploration_data_ucb_ready.csv", index=False)
-    summary_df.to_csv("summary_planet_stats.csv", index=False)
-    print("✓ Data saved: exploration_data_ucb_ready.csv and summary_planet_stats.csv")
+    save_dataframes(full_df, summary_df)
 
     # Step 8: Visualizations
-    print("\n8️⃣ Generating visualizations...")
-
+    print("\n8️⃣ Saving visualizations...")
     plot_survival_distribution(full_df)
     plot_efficiency(full_df)
 

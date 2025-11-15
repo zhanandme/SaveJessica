@@ -30,12 +30,10 @@ wheels/
 .ipynb_checkpoints
 
 # Data files
-*.csv
 *.json
-data/
+
 
 # Plots
-*.png
 *.jpg
 plots/
 

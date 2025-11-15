@@ -1,0 +1,784 @@
+trip_number,planet,planet_name,morties_sent,survived,steps_taken,morties_in_citadel,morties_on_planet_jessica,morties_lost,group_size,survival_rate
+1,0,"""On a Cob"" Planet",1,False,1,999,0,1,1,0.0
+2,0,"""On a Cob"" Planet",1,True,2,998,1,1,1,1.0
+3,0,"""On a Cob"" Planet",1,True,3,997,2,1,1,1.0
+4,0,"""On a Cob"" Planet",1,True,4,996,3,1,1,1.0
+5,0,"""On a Cob"" Planet",1,True,5,995,4,1,1,1.0
+6,0,"""On a Cob"" Planet",1,True,6,994,5,1,1,1.0
+7,0,"""On a Cob"" Planet",1,True,7,993,6,1,1,1.0
+8,0,"""On a Cob"" Planet",1,True,8,992,7,1,1,1.0
+9,0,"""On a Cob"" Planet",1,False,9,991,7,2,1,0.0
+10,0,"""On a Cob"" Planet",1,False,10,990,7,3,1,0.0
+11,0,"""On a Cob"" Planet",1,False,11,989,7,4,1,0.0
+12,0,"""On a Cob"" Planet",1,False,12,988,7,5,1,0.0
+13,0,"""On a Cob"" Planet",1,False,13,987,7,6,1,0.0
+14,0,"""On a Cob"" Planet",1,True,14,986,8,6,1,1.0
+15,0,"""On a Cob"" Planet",1,True,15,985,9,6,1,1.0
+16,0,"""On a Cob"" Planet",1,True,16,984,10,6,1,1.0
+17,0,"""On a Cob"" Planet",1,True,17,983,11,6,1,1.0
+18,0,"""On a Cob"" Planet",1,False,18,982,11,7,1,0.0
+19,0,"""On a Cob"" Planet",1,False,19,981,11,8,1,0.0
+20,0,"""On a Cob"" Planet",1,False,20,980,11,9,1,0.0
+21,0,"""On a Cob"" Planet",1,False,21,979,11,10,1,0.0
+22,0,"""On a Cob"" Planet",1,False,22,978,11,11,1,0.0
+23,0,"""On a Cob"" Planet",1,False,23,977,11,12,1,0.0
+24,0,"""On a Cob"" Planet",1,True,24,976,12,12,1,1.0
+25,0,"""On a Cob"" Planet",1,True,25,975,13,12,1,1.0
+26,0,"""On a Cob"" Planet",1,True,26,974,14,12,1,1.0
+27,0,"""On a Cob"" Planet",1,True,27,973,15,12,1,1.0
+28,0,"""On a Cob"" Planet",1,False,28,972,15,13,1,0.0
+29,0,"""On a Cob"" Planet",1,True,29,971,16,13,1,1.0
+30,0,"""On a Cob"" Planet",1,False,30,970,16,14,1,0.0
+31,0,"""On a Cob"" Planet",1,False,31,969,16,15,1,0.0
+32,0,"""On a Cob"" Planet",1,False,32,968,16,16,1,0.0
+33,0,"""On a Cob"" Planet",1,False,33,967,16,17,1,0.0
+34,0,"""On a Cob"" Planet",1,True,34,966,17,17,1,1.0
+35,0,"""On a Cob"" Planet",1,True,35,965,18,17,1,1.0
+36,0,"""On a Cob"" Planet",1,True,36,964,19,17,1,1.0
+37,0,"""On a Cob"" Planet",1,True,37,963,20,17,1,1.0
+38,0,"""On a Cob"" Planet",1,False,38,962,20,18,1,0.0
+39,0,"""On a Cob"" Planet",1,True,39,961,21,18,1,1.0
+40,0,"""On a Cob"" Planet",1,False,40,960,21,19,1,0.0
+41,0,"""On a Cob"" Planet",1,False,41,959,21,20,1,0.0
+42,0,"""On a Cob"" Planet",1,False,42,958,21,21,1,0.0
+43,0,"""On a Cob"" Planet",1,False,43,957,21,22,1,0.0
+44,0,"""On a Cob"" Planet",1,True,44,956,22,22,1,1.0
+45,0,"""On a Cob"" Planet",1,True,45,955,23,22,1,1.0
+46,0,"""On a Cob"" Planet",1,True,46,954,24,22,1,1.0
+47,0,"""On a Cob"" Planet",1,True,47,953,25,22,1,1.0
+48,0,"""On a Cob"" Planet",1,True,48,952,26,22,1,1.0
+49,0,"""On a Cob"" Planet",1,False,49,951,26,23,1,0.0
+50,0,"""On a Cob"" Planet",1,False,50,950,26,24,1,0.0
+51,0,"""On a Cob"" Planet",1,False,51,949,26,25,1,0.0
+52,0,"""On a Cob"" Planet",1,False,52,948,26,26,1,0.0
+53,0,"""On a Cob"" Planet",1,True,53,947,27,26,1,1.0
+54,0,"""On a Cob"" Planet",1,True,54,946,28,26,1,1.0
+55,0,"""On a Cob"" Planet",1,True,55,945,29,26,1,1.0
+56,0,"""On a Cob"" Planet",1,True,56,944,30,26,1,1.0
+57,0,"""On a Cob"" Planet",1,True,57,943,31,26,1,1.0
+58,0,"""On a Cob"" Planet",1,False,58,942,31,27,1,0.0
+59,0,"""On a Cob"" Planet",1,True,59,941,32,27,1,1.0
+60,0,"""On a Cob"" Planet",1,False,60,940,32,28,1,0.0
+61,0,"""On a Cob"" Planet",1,False,61,939,32,29,1,0.0
+62,0,"""On a Cob"" Planet",1,False,62,938,32,30,1,0.0
+63,0,"""On a Cob"" Planet",1,False,63,937,32,31,1,0.0
+64,0,"""On a Cob"" Planet",1,False,64,936,32,32,1,0.0
+65,0,"""On a Cob"" Planet",1,True,65,935,33,32,1,1.0
+66,0,"""On a Cob"" Planet",1,True,66,934,34,32,1,1.0
+67,0,"""On a Cob"" Planet",1,True,67,933,35,32,1,1.0
+68,0,"""On a Cob"" Planet",1,True,68,932,36,32,1,1.0
+69,0,"""On a Cob"" Planet",1,True,69,931,37,32,1,1.0
+70,0,"""On a Cob"" Planet",1,False,70,930,37,33,1,0.0
+71,0,"""On a Cob"" Planet",1,False,71,929,37,34,1,0.0
+72,0,"""On a Cob"" Planet",1,False,72,928,37,35,1,0.0
+73,0,"""On a Cob"" Planet",1,False,73,927,37,36,1,0.0
+74,0,"""On a Cob"" Planet",1,True,74,926,38,36,1,1.0
+75,0,"""On a Cob"" Planet",1,True,75,925,39,36,1,1.0
+76,0,"""On a Cob"" Planet",1,True,76,924,40,36,1,1.0
+77,0,"""On a Cob"" Planet",1,True,77,923,41,36,1,1.0
+78,0,"""On a Cob"" Planet",1,False,78,922,41,37,1,0.0
+79,0,"""On a Cob"" Planet",1,False,79,921,41,38,1,0.0
+80,0,"""On a Cob"" Planet",1,False,80,920,41,39,1,0.0
+81,0,"""On a Cob"" Planet",1,False,81,919,41,40,1,0.0
+82,0,"""On a Cob"" Planet",1,False,82,918,41,41,1,0.0
+83,0,"""On a Cob"" Planet",1,False,83,917,41,42,1,0.0
+84,0,"""On a Cob"" Planet",1,True,84,916,42,42,1,1.0
+85,0,"""On a Cob"" Planet",1,True,85,915,43,42,1,1.0
+86,0,"""On a Cob"" Planet",1,True,86,914,44,42,1,1.0
+87,0,"""On a Cob"" Planet",1,True,87,913,45,42,1,1.0
+88,0,"""On a Cob"" Planet",1,False,88,912,45,43,1,0.0
+89,0,"""On a Cob"" Planet",1,False,89,911,45,44,1,0.0
+90,0,"""On a Cob"" Planet",1,False,90,910,45,45,1,0.0
+91,0,"""On a Cob"" Planet",1,False,91,909,45,46,1,0.0
+92,0,"""On a Cob"" Planet",1,False,92,908,45,47,1,0.0
+93,0,"""On a Cob"" Planet",1,False,93,907,45,48,1,0.0
+94,0,"""On a Cob"" Planet",1,True,94,906,46,48,1,1.0
+95,0,"""On a Cob"" Planet",1,True,95,905,47,48,1,1.0
+96,0,"""On a Cob"" Planet",1,True,96,904,48,48,1,1.0
+97,0,"""On a Cob"" Planet",1,True,97,903,49,48,1,1.0
+98,0,"""On a Cob"" Planet",1,False,98,902,49,49,1,0.0
+99,0,"""On a Cob"" Planet",1,False,99,901,49,50,1,0.0
+100,0,"""On a Cob"" Planet",1,False,100,900,49,51,1,0.0
+101,0,"""On a Cob"" Planet",1,False,101,899,49,52,1,0.0
+102,0,"""On a Cob"" Planet",1,False,102,898,49,53,1,0.0
+103,0,"""On a Cob"" Planet",1,True,103,897,50,53,1,1.0
+104,0,"""On a Cob"" Planet",1,True,104,896,51,53,1,1.0
+105,0,"""On a Cob"" Planet",1,True,105,895,52,53,1,1.0
+106,0,"""On a Cob"" Planet",1,True,106,894,53,53,1,1.0
+107,0,"""On a Cob"" Planet",1,True,107,893,54,53,1,1.0
+108,0,"""On a Cob"" Planet",1,True,108,892,55,53,1,1.0
+109,0,"""On a Cob"" Planet",1,False,109,891,55,54,1,0.0
+110,0,"""On a Cob"" Planet",1,False,110,890,55,55,1,0.0
+111,0,"""On a Cob"" Planet",1,False,111,889,55,56,1,0.0
+112,0,"""On a Cob"" Planet",1,False,112,888,55,57,1,0.0
+113,0,"""On a Cob"" Planet",1,False,113,887,55,58,1,0.0
+114,0,"""On a Cob"" Planet",1,True,114,886,56,58,1,1.0
+115,0,"""On a Cob"" Planet",1,True,115,885,57,58,1,1.0
+116,0,"""On a Cob"" Planet",1,True,116,884,58,58,1,1.0
+117,0,"""On a Cob"" Planet",1,False,117,883,58,59,1,0.0
+118,0,"""On a Cob"" Planet",1,False,118,882,58,60,1,0.0
+119,0,"""On a Cob"" Planet",1,False,119,881,58,61,1,0.0
+120,0,"""On a Cob"" Planet",1,False,120,880,58,62,1,0.0
+121,0,"""On a Cob"" Planet",1,False,121,879,58,63,1,0.0
+122,0,"""On a Cob"" Planet",1,False,122,878,58,64,1,0.0
+123,0,"""On a Cob"" Planet",1,False,123,877,58,65,1,0.0
+124,0,"""On a Cob"" Planet",1,False,124,876,58,66,1,0.0
+125,0,"""On a Cob"" Planet",1,True,125,875,59,66,1,1.0
+126,0,"""On a Cob"" Planet",1,True,126,874,60,66,1,1.0
+127,0,"""On a Cob"" Planet",1,True,127,873,61,66,1,1.0
+128,0,"""On a Cob"" Planet",1,True,128,872,62,66,1,1.0
+129,0,"""On a Cob"" Planet",1,False,129,871,62,67,1,0.0
+130,0,"""On a Cob"" Planet",1,False,130,870,62,68,1,0.0
+131,0,"""On a Cob"" Planet",1,False,131,869,62,69,1,0.0
+132,0,"""On a Cob"" Planet",1,True,132,868,63,69,1,1.0
+133,0,"""On a Cob"" Planet",1,True,133,867,64,69,1,1.0
+134,0,"""On a Cob"" Planet",1,True,134,866,65,69,1,1.0
+135,0,"""On a Cob"" Planet",1,True,135,865,66,69,1,1.0
+136,0,"""On a Cob"" Planet",1,True,136,864,67,69,1,1.0
+137,0,"""On a Cob"" Planet",1,True,137,863,68,69,1,1.0
+138,0,"""On a Cob"" Planet",1,True,138,862,69,69,1,1.0
+139,0,"""On a Cob"" Planet",1,False,139,861,69,70,1,0.0
+140,0,"""On a Cob"" Planet",1,False,140,860,69,71,1,0.0
+141,0,"""On a Cob"" Planet",1,False,141,859,69,72,1,0.0
+142,0,"""On a Cob"" Planet",1,True,142,858,70,72,1,1.0
+143,0,"""On a Cob"" Planet",1,True,143,857,71,72,1,1.0
+144,0,"""On a Cob"" Planet",1,True,144,856,72,72,1,1.0
+145,0,"""On a Cob"" Planet",1,True,145,855,73,72,1,1.0
+146,0,"""On a Cob"" Planet",1,True,146,854,74,72,1,1.0
+147,0,"""On a Cob"" Planet",1,True,147,853,75,72,1,1.0
+148,0,"""On a Cob"" Planet",1,False,148,852,75,73,1,0.0
+149,0,"""On a Cob"" Planet",1,False,149,851,75,74,1,0.0
+150,0,"""On a Cob"" Planet",1,False,150,850,75,75,1,0.0
+1,1,Cronenberg World,1,True,151,849,76,75,1,1.0
+2,1,Cronenberg World,1,True,152,848,77,75,1,1.0
+3,1,Cronenberg World,1,True,153,847,78,75,1,1.0
+4,1,Cronenberg World,1,True,154,846,79,75,1,1.0
+5,1,Cronenberg World,1,True,155,845,80,75,1,1.0
+6,1,Cronenberg World,1,True,156,844,81,75,1,1.0
+7,1,Cronenberg World,1,True,157,843,82,75,1,1.0
+8,1,Cronenberg World,1,True,158,842,83,75,1,1.0
+9,1,Cronenberg World,1,True,159,841,84,75,1,1.0
+10,1,Cronenberg World,1,False,160,840,84,76,1,0.0
+11,1,Cronenberg World,1,False,161,839,84,77,1,0.0
+12,1,Cronenberg World,1,False,162,838,84,78,1,0.0
+13,1,Cronenberg World,1,False,163,837,84,79,1,0.0
+14,1,Cronenberg World,1,False,164,836,84,80,1,0.0
+15,1,Cronenberg World,1,False,165,835,84,81,1,0.0
+16,1,Cronenberg World,1,False,166,834,84,82,1,0.0
+17,1,Cronenberg World,1,False,167,833,84,83,1,0.0
+18,1,Cronenberg World,1,True,168,832,85,83,1,1.0
+19,1,Cronenberg World,1,True,169,831,86,83,1,1.0
+20,1,Cronenberg World,1,True,170,830,87,83,1,1.0
+21,1,Cronenberg World,1,False,171,829,87,84,1,0.0
+22,1,Cronenberg World,1,True,172,828,88,84,1,1.0
+23,1,Cronenberg World,1,True,173,827,89,84,1,1.0
+24,1,Cronenberg World,1,True,174,826,90,84,1,1.0
+25,1,Cronenberg World,1,True,175,825,91,84,1,1.0
+26,1,Cronenberg World,1,True,176,824,92,84,1,1.0
+27,1,Cronenberg World,1,True,177,823,93,84,1,1.0
+28,1,Cronenberg World,1,False,178,822,93,85,1,0.0
+29,1,Cronenberg World,1,True,179,821,94,85,1,1.0
+30,1,Cronenberg World,1,False,180,820,94,86,1,0.0
+31,1,Cronenberg World,1,True,181,819,95,86,1,1.0
+32,1,Cronenberg World,1,False,182,818,95,87,1,0.0
+33,1,Cronenberg World,1,False,183,817,95,88,1,0.0
+34,1,Cronenberg World,1,False,184,816,95,89,1,0.0
+35,1,Cronenberg World,1,False,185,815,95,90,1,0.0
+36,1,Cronenberg World,1,False,186,814,95,91,1,0.0
+37,1,Cronenberg World,1,True,187,813,96,91,1,1.0
+38,1,Cronenberg World,1,True,188,812,97,91,1,1.0
+39,1,Cronenberg World,1,True,189,811,98,91,1,1.0
+40,1,Cronenberg World,1,True,190,810,99,91,1,1.0
+41,1,Cronenberg World,1,True,191,809,100,91,1,1.0
+42,1,Cronenberg World,1,True,192,808,101,91,1,1.0
+43,1,Cronenberg World,1,True,193,807,102,91,1,1.0
+44,1,Cronenberg World,1,True,194,806,103,91,1,1.0
+45,1,Cronenberg World,1,False,195,805,103,92,1,0.0
+46,1,Cronenberg World,1,False,196,804,103,93,1,0.0
+47,1,Cronenberg World,1,True,197,803,104,93,1,1.0
+48,1,Cronenberg World,1,True,198,802,105,93,1,1.0
+49,1,Cronenberg World,1,True,199,801,106,93,1,1.0
+50,1,Cronenberg World,1,True,200,800,107,93,1,1.0
+51,1,Cronenberg World,1,False,201,799,107,94,1,0.0
+52,1,Cronenberg World,1,False,202,798,107,95,1,0.0
+53,1,Cronenberg World,1,False,203,797,107,96,1,0.0
+54,1,Cronenberg World,1,False,204,796,107,97,1,0.0
+55,1,Cronenberg World,1,False,205,795,107,98,1,0.0
+56,1,Cronenberg World,1,False,206,794,107,99,1,0.0
+57,1,Cronenberg World,1,False,207,793,107,100,1,0.0
+58,1,Cronenberg World,1,True,208,792,108,100,1,1.0
+59,1,Cronenberg World,1,True,209,791,109,100,1,1.0
+60,1,Cronenberg World,1,True,210,790,110,100,1,1.0
+61,1,Cronenberg World,1,False,211,789,110,101,1,0.0
+62,1,Cronenberg World,1,False,212,788,110,102,1,0.0
+63,1,Cronenberg World,1,True,213,787,111,102,1,1.0
+64,1,Cronenberg World,1,True,214,786,112,102,1,1.0
+65,1,Cronenberg World,1,False,215,785,112,103,1,0.0
+66,1,Cronenberg World,1,True,216,784,113,103,1,1.0
+67,1,Cronenberg World,1,False,217,783,113,104,1,0.0
+68,1,Cronenberg World,1,False,218,782,113,105,1,0.0
+69,1,Cronenberg World,1,False,219,781,113,106,1,0.0
+70,1,Cronenberg World,1,True,220,780,114,106,1,1.0
+71,1,Cronenberg World,1,False,221,779,114,107,1,0.0
+72,1,Cronenberg World,1,False,222,778,114,108,1,0.0
+73,1,Cronenberg World,1,False,223,777,114,109,1,0.0
+74,1,Cronenberg World,1,False,224,776,114,110,1,0.0
+75,1,Cronenberg World,1,False,225,775,114,111,1,0.0
+76,1,Cronenberg World,1,True,226,774,115,111,1,1.0
+77,1,Cronenberg World,1,True,227,773,116,111,1,1.0
+78,1,Cronenberg World,1,True,228,772,117,111,1,1.0
+79,1,Cronenberg World,1,False,229,771,117,112,1,0.0
+80,1,Cronenberg World,1,True,230,770,118,112,1,1.0
+81,1,Cronenberg World,1,False,231,769,118,113,1,0.0
+82,1,Cronenberg World,1,True,232,768,119,113,1,1.0
+83,1,Cronenberg World,1,True,233,767,120,113,1,1.0
+84,1,Cronenberg World,1,True,234,766,121,113,1,1.0
+85,1,Cronenberg World,1,True,235,765,122,113,1,1.0
+86,1,Cronenberg World,1,True,236,764,123,113,1,1.0
+87,1,Cronenberg World,1,True,237,763,124,113,1,1.0
+88,1,Cronenberg World,1,False,238,762,124,114,1,0.0
+89,1,Cronenberg World,1,True,239,761,125,114,1,1.0
+90,1,Cronenberg World,1,False,240,760,125,115,1,0.0
+91,1,Cronenberg World,1,False,241,759,125,116,1,0.0
+92,1,Cronenberg World,1,False,242,758,125,117,1,0.0
+93,1,Cronenberg World,1,False,243,757,125,118,1,0.0
+94,1,Cronenberg World,1,False,244,756,125,119,1,0.0
+95,1,Cronenberg World,1,False,245,755,125,120,1,0.0
+96,1,Cronenberg World,1,False,246,754,125,121,1,0.0
+97,1,Cronenberg World,1,True,247,753,126,121,1,1.0
+98,1,Cronenberg World,1,True,248,752,127,121,1,1.0
+99,1,Cronenberg World,1,True,249,751,128,121,1,1.0
+100,1,Cronenberg World,1,True,250,750,129,121,1,1.0
+101,1,Cronenberg World,1,True,251,749,130,121,1,1.0
+102,1,Cronenberg World,1,True,252,748,131,121,1,1.0
+103,1,Cronenberg World,1,True,253,747,132,121,1,1.0
+104,1,Cronenberg World,1,True,254,746,133,121,1,1.0
+105,1,Cronenberg World,1,True,255,745,134,121,1,1.0
+106,1,Cronenberg World,1,True,256,744,135,121,1,1.0
+107,1,Cronenberg World,1,False,257,743,135,122,1,0.0
+108,1,Cronenberg World,1,True,258,742,136,122,1,1.0
+109,1,Cronenberg World,1,False,259,741,136,123,1,0.0
+110,1,Cronenberg World,1,False,260,740,136,124,1,0.0
+111,1,Cronenberg World,1,True,261,739,137,124,1,1.0
+112,1,Cronenberg World,1,False,262,738,137,125,1,0.0
+113,1,Cronenberg World,1,False,263,737,137,126,1,0.0
+114,1,Cronenberg World,1,True,264,736,138,126,1,1.0
+115,1,Cronenberg World,1,False,265,735,138,127,1,0.0
+116,1,Cronenberg World,1,False,266,734,138,128,1,0.0
+117,1,Cronenberg World,1,True,267,733,139,128,1,1.0
+118,1,Cronenberg World,1,False,268,732,139,129,1,0.0
+119,1,Cronenberg World,1,True,269,731,140,129,1,1.0
+120,1,Cronenberg World,1,False,270,730,140,130,1,0.0
+121,1,Cronenberg World,1,True,271,729,141,130,1,1.0
+122,1,Cronenberg World,1,True,272,728,142,130,1,1.0
+123,1,Cronenberg World,1,True,273,727,143,130,1,1.0
+124,1,Cronenberg World,1,True,274,726,144,130,1,1.0
+125,1,Cronenberg World,1,True,275,725,145,130,1,1.0
+126,1,Cronenberg World,1,True,276,724,146,130,1,1.0
+127,1,Cronenberg World,1,False,277,723,146,131,1,0.0
+128,1,Cronenberg World,1,False,278,722,146,132,1,0.0
+129,1,Cronenberg World,1,True,279,721,147,132,1,1.0
+130,1,Cronenberg World,1,False,280,720,147,133,1,0.0
+131,1,Cronenberg World,1,False,281,719,147,134,1,0.0
+132,1,Cronenberg World,1,False,282,718,147,135,1,0.0
+133,1,Cronenberg World,1,False,283,717,147,136,1,0.0
+134,1,Cronenberg World,1,False,284,716,147,137,1,0.0
+135,1,Cronenberg World,1,False,285,715,147,138,1,0.0
+136,1,Cronenberg World,1,False,286,714,147,139,1,0.0
+137,1,Cronenberg World,1,True,287,713,148,139,1,1.0
+138,1,Cronenberg World,1,True,288,712,149,139,1,1.0
+139,1,Cronenberg World,1,False,289,711,149,140,1,0.0
+140,1,Cronenberg World,1,False,290,710,149,141,1,0.0
+141,1,Cronenberg World,1,True,291,709,150,141,1,1.0
+142,1,Cronenberg World,1,True,292,708,151,141,1,1.0
+143,1,Cronenberg World,1,True,293,707,152,141,1,1.0
+144,1,Cronenberg World,1,True,294,706,153,141,1,1.0
+145,1,Cronenberg World,1,True,295,705,154,141,1,1.0
+146,1,Cronenberg World,1,True,296,704,155,141,1,1.0
+147,1,Cronenberg World,1,True,297,703,156,141,1,1.0
+148,1,Cronenberg World,1,False,298,702,156,142,1,0.0
+149,1,Cronenberg World,1,False,299,701,156,143,1,0.0
+150,1,Cronenberg World,1,False,300,700,156,144,1,0.0
+1,2,The Purge Planet,1,False,301,699,156,145,1,0.0
+2,2,The Purge Planet,1,True,302,698,157,145,1,1.0
+3,2,The Purge Planet,1,True,303,697,158,145,1,1.0
+4,2,The Purge Planet,1,True,304,696,159,145,1,1.0
+5,2,The Purge Planet,1,True,305,695,160,145,1,1.0
+6,2,The Purge Planet,1,True,306,694,161,145,1,1.0
+7,2,The Purge Planet,1,True,307,693,162,145,1,1.0
+8,2,The Purge Planet,1,True,308,692,163,145,1,1.0
+9,2,The Purge Planet,1,True,309,691,164,145,1,1.0
+10,2,The Purge Planet,1,True,310,690,165,145,1,1.0
+11,2,The Purge Planet,1,True,311,689,166,145,1,1.0
+12,2,The Purge Planet,1,True,312,688,167,145,1,1.0
+13,2,The Purge Planet,1,False,313,687,167,146,1,0.0
+14,2,The Purge Planet,1,False,314,686,167,147,1,0.0
+15,2,The Purge Planet,1,True,315,685,168,147,1,1.0
+16,2,The Purge Planet,1,True,316,684,169,147,1,1.0
+17,2,The Purge Planet,1,False,317,683,169,148,1,0.0
+18,2,The Purge Planet,1,True,318,682,170,148,1,1.0
+19,2,The Purge Planet,1,True,319,681,171,148,1,1.0
+20,2,The Purge Planet,1,True,320,680,172,148,1,1.0
+21,2,The Purge Planet,1,True,321,679,173,148,1,1.0
+22,2,The Purge Planet,1,True,322,678,174,148,1,1.0
+23,2,The Purge Planet,1,True,323,677,175,148,1,1.0
+24,2,The Purge Planet,1,True,324,676,176,148,1,1.0
+25,2,The Purge Planet,1,True,325,675,177,148,1,1.0
+26,2,The Purge Planet,1,True,326,674,178,148,1,1.0
+27,2,The Purge Planet,1,True,327,673,179,148,1,1.0
+28,2,The Purge Planet,1,True,328,672,180,148,1,1.0
+29,2,The Purge Planet,1,False,329,671,180,149,1,0.0
+30,2,The Purge Planet,1,True,330,670,181,149,1,1.0
+31,2,The Purge Planet,1,True,331,669,182,149,1,1.0
+32,2,The Purge Planet,1,True,332,668,183,149,1,1.0
+33,2,The Purge Planet,1,True,333,667,184,149,1,1.0
+34,2,The Purge Planet,1,False,334,666,184,150,1,0.0
+35,2,The Purge Planet,1,True,335,665,185,150,1,1.0
+36,2,The Purge Planet,1,True,336,664,186,150,1,1.0
+37,2,The Purge Planet,1,True,337,663,187,150,1,1.0
+38,2,The Purge Planet,1,True,338,662,188,150,1,1.0
+39,2,The Purge Planet,1,True,339,661,189,150,1,1.0
+40,2,The Purge Planet,1,True,340,660,190,150,1,1.0
+41,2,The Purge Planet,1,True,341,659,191,150,1,1.0
+42,2,The Purge Planet,1,True,342,658,192,150,1,1.0
+43,2,The Purge Planet,1,True,343,657,193,150,1,1.0
+44,2,The Purge Planet,1,True,344,656,194,150,1,1.0
+45,2,The Purge Planet,1,True,345,655,195,150,1,1.0
+46,2,The Purge Planet,1,True,346,654,196,150,1,1.0
+47,2,The Purge Planet,1,True,347,653,197,150,1,1.0
+48,2,The Purge Planet,1,True,348,652,198,150,1,1.0
+49,2,The Purge Planet,1,True,349,651,199,150,1,1.0
+50,2,The Purge Planet,1,True,350,650,200,150,1,1.0
+51,2,The Purge Planet,1,True,351,649,201,150,1,1.0
+52,2,The Purge Planet,1,True,352,648,202,150,1,1.0
+53,2,The Purge Planet,1,True,353,647,203,150,1,1.0
+54,2,The Purge Planet,1,True,354,646,204,150,1,1.0
+55,2,The Purge Planet,1,True,355,645,205,150,1,1.0
+56,2,The Purge Planet,1,True,356,644,206,150,1,1.0
+57,2,The Purge Planet,1,True,357,643,207,150,1,1.0
+58,2,The Purge Planet,1,False,358,642,207,151,1,0.0
+59,2,The Purge Planet,1,True,359,641,208,151,1,1.0
+60,2,The Purge Planet,1,True,360,640,209,151,1,1.0
+61,2,The Purge Planet,1,True,361,639,210,151,1,1.0
+62,2,The Purge Planet,1,True,362,638,211,151,1,1.0
+63,2,The Purge Planet,1,True,363,637,212,151,1,1.0
+64,2,The Purge Planet,1,True,364,636,213,151,1,1.0
+65,2,The Purge Planet,1,True,365,635,214,151,1,1.0
+66,2,The Purge Planet,1,True,366,634,215,151,1,1.0
+67,2,The Purge Planet,1,True,367,633,216,151,1,1.0
+68,2,The Purge Planet,1,True,368,632,217,151,1,1.0
+69,2,The Purge Planet,1,True,369,631,218,151,1,1.0
+70,2,The Purge Planet,1,True,370,630,219,151,1,1.0
+71,2,The Purge Planet,1,True,371,629,220,151,1,1.0
+72,2,The Purge Planet,1,True,372,628,221,151,1,1.0
+73,2,The Purge Planet,1,True,373,627,222,151,1,1.0
+74,2,The Purge Planet,1,True,374,626,223,151,1,1.0
+75,2,The Purge Planet,1,True,375,625,224,151,1,1.0
+76,2,The Purge Planet,1,True,376,624,225,151,1,1.0
+77,2,The Purge Planet,1,True,377,623,226,151,1,1.0
+78,2,The Purge Planet,1,True,378,622,227,151,1,1.0
+79,2,The Purge Planet,1,True,379,621,228,151,1,1.0
+80,2,The Purge Planet,1,True,380,620,229,151,1,1.0
+81,2,The Purge Planet,1,True,381,619,230,151,1,1.0
+82,2,The Purge Planet,1,True,382,618,231,151,1,1.0
+83,2,The Purge Planet,1,True,383,617,232,151,1,1.0
+84,2,The Purge Planet,1,False,384,616,232,152,1,0.0
+85,2,The Purge Planet,1,True,385,615,233,152,1,1.0
+86,2,The Purge Planet,1,True,386,614,234,152,1,1.0
+87,2,The Purge Planet,1,True,387,613,235,152,1,1.0
+88,2,The Purge Planet,1,True,388,612,236,152,1,1.0
+89,2,The Purge Planet,1,False,389,611,236,153,1,0.0
+90,2,The Purge Planet,1,False,390,610,236,154,1,0.0
+91,2,The Purge Planet,1,True,391,609,237,154,1,1.0
+92,2,The Purge Planet,1,False,392,608,237,155,1,0.0
+93,2,The Purge Planet,1,True,393,607,238,155,1,1.0
+94,2,The Purge Planet,1,True,394,606,239,155,1,1.0
+95,2,The Purge Planet,1,True,395,605,240,155,1,1.0
+96,2,The Purge Planet,1,True,396,604,241,155,1,1.0
+97,2,The Purge Planet,1,False,397,603,241,156,1,0.0
+98,2,The Purge Planet,1,True,398,602,242,156,1,1.0
+99,2,The Purge Planet,1,True,399,601,243,156,1,1.0
+100,2,The Purge Planet,1,True,400,600,244,156,1,1.0
+101,2,The Purge Planet,1,False,401,599,244,157,1,0.0
+102,2,The Purge Planet,1,False,402,598,244,158,1,0.0
+103,2,The Purge Planet,1,True,403,597,245,158,1,1.0
+104,2,The Purge Planet,1,False,404,596,245,159,1,0.0
+105,2,The Purge Planet,1,False,405,595,245,160,1,0.0
+106,2,The Purge Planet,1,True,406,594,246,160,1,1.0
+107,2,The Purge Planet,1,False,407,593,246,161,1,0.0
+108,2,The Purge Planet,1,True,408,592,247,161,1,1.0
+109,2,The Purge Planet,1,True,409,591,248,161,1,1.0
+110,2,The Purge Planet,1,False,410,590,248,162,1,0.0
+111,2,The Purge Planet,1,True,411,589,249,162,1,1.0
+112,2,The Purge Planet,1,False,412,588,249,163,1,0.0
+113,2,The Purge Planet,1,True,413,587,250,163,1,1.0
+114,2,The Purge Planet,1,False,414,586,250,164,1,0.0
+115,2,The Purge Planet,1,False,415,585,250,165,1,0.0
+116,2,The Purge Planet,1,True,416,584,251,165,1,1.0
+117,2,The Purge Planet,1,False,417,583,251,166,1,0.0
+118,2,The Purge Planet,1,False,418,582,251,167,1,0.0
+119,2,The Purge Planet,1,False,419,581,251,168,1,0.0
+120,2,The Purge Planet,1,False,420,580,251,169,1,0.0
+121,2,The Purge Planet,1,False,421,579,251,170,1,0.0
+122,2,The Purge Planet,1,False,422,578,251,171,1,0.0
+123,2,The Purge Planet,1,False,423,577,251,172,1,0.0
+124,2,The Purge Planet,1,False,424,576,251,173,1,0.0
+125,2,The Purge Planet,1,True,425,575,252,173,1,1.0
+126,2,The Purge Planet,1,False,426,574,252,174,1,0.0
+127,2,The Purge Planet,1,False,427,573,252,175,1,0.0
+128,2,The Purge Planet,1,False,428,572,252,176,1,0.0
+129,2,The Purge Planet,1,False,429,571,252,177,1,0.0
+130,2,The Purge Planet,1,False,430,570,252,178,1,0.0
+131,2,The Purge Planet,1,False,431,569,252,179,1,0.0
+132,2,The Purge Planet,1,False,432,568,252,180,1,0.0
+133,2,The Purge Planet,1,False,433,567,252,181,1,0.0
+134,2,The Purge Planet,1,False,434,566,252,182,1,0.0
+135,2,The Purge Planet,1,False,435,565,252,183,1,0.0
+136,2,The Purge Planet,1,False,436,564,252,184,1,0.0
+137,2,The Purge Planet,1,False,437,563,252,185,1,0.0
+138,2,The Purge Planet,1,False,438,562,252,186,1,0.0
+139,2,The Purge Planet,1,False,439,561,252,187,1,0.0
+140,2,The Purge Planet,1,False,440,560,252,188,1,0.0
+141,2,The Purge Planet,1,False,441,559,252,189,1,0.0
+142,2,The Purge Planet,1,False,442,558,252,190,1,0.0
+143,2,The Purge Planet,1,False,443,557,252,191,1,0.0
+144,2,The Purge Planet,1,False,444,556,252,192,1,0.0
+145,2,The Purge Planet,1,False,445,555,252,193,1,0.0
+146,2,The Purge Planet,1,False,446,554,252,194,1,0.0
+147,2,The Purge Planet,1,False,447,553,252,195,1,0.0
+148,2,The Purge Planet,1,False,448,552,252,196,1,0.0
+149,2,The Purge Planet,1,False,449,551,252,197,1,0.0
+150,2,The Purge Planet,1,False,450,550,252,198,1,0.0
+1,0,"""On a Cob"" Planet",3,False,1,997,0,3,3,0.0
+2,0,"""On a Cob"" Planet",3,True,2,994,3,3,3,0.3333333333333333
+3,0,"""On a Cob"" Planet",3,True,3,991,6,3,3,0.3333333333333333
+4,0,"""On a Cob"" Planet",3,True,4,988,9,3,3,0.3333333333333333
+5,0,"""On a Cob"" Planet",3,True,5,985,12,3,3,0.3333333333333333
+6,0,"""On a Cob"" Planet",3,True,6,982,15,3,3,0.3333333333333333
+7,0,"""On a Cob"" Planet",3,False,7,979,15,6,3,0.0
+8,0,"""On a Cob"" Planet",3,False,8,976,15,9,3,0.0
+9,0,"""On a Cob"" Planet",3,False,9,973,15,12,3,0.0
+10,0,"""On a Cob"" Planet",3,False,10,970,15,15,3,0.0
+11,0,"""On a Cob"" Planet",3,True,11,967,18,15,3,0.3333333333333333
+12,0,"""On a Cob"" Planet",3,True,12,964,21,15,3,0.3333333333333333
+13,0,"""On a Cob"" Planet",3,True,13,961,24,15,3,0.3333333333333333
+14,0,"""On a Cob"" Planet",3,True,14,958,27,15,3,0.3333333333333333
+15,0,"""On a Cob"" Planet",3,True,15,955,30,15,3,0.3333333333333333
+16,0,"""On a Cob"" Planet",3,False,16,952,30,18,3,0.0
+17,0,"""On a Cob"" Planet",3,False,17,949,30,21,3,0.0
+18,0,"""On a Cob"" Planet",3,False,18,946,30,24,3,0.0
+19,0,"""On a Cob"" Planet",3,True,19,943,33,24,3,0.3333333333333333
+20,0,"""On a Cob"" Planet",3,False,20,940,33,27,3,0.0
+21,0,"""On a Cob"" Planet",3,True,21,937,36,27,3,0.3333333333333333
+22,0,"""On a Cob"" Planet",3,True,22,934,39,27,3,0.3333333333333333
+23,0,"""On a Cob"" Planet",3,True,23,931,42,27,3,0.3333333333333333
+24,0,"""On a Cob"" Planet",3,False,24,928,42,30,3,0.0
+25,0,"""On a Cob"" Planet",3,True,25,925,45,30,3,0.3333333333333333
+26,0,"""On a Cob"" Planet",3,False,26,922,45,33,3,0.0
+27,0,"""On a Cob"" Planet",3,False,27,919,45,36,3,0.0
+28,0,"""On a Cob"" Planet",3,False,28,916,45,39,3,0.0
+29,0,"""On a Cob"" Planet",3,True,29,913,48,39,3,0.3333333333333333
+30,0,"""On a Cob"" Planet",3,True,30,910,51,39,3,0.3333333333333333
+31,0,"""On a Cob"" Planet",3,True,31,907,54,39,3,0.3333333333333333
+32,0,"""On a Cob"" Planet",3,True,32,904,57,39,3,0.3333333333333333
+33,0,"""On a Cob"" Planet",3,True,33,901,60,39,3,0.3333333333333333
+34,0,"""On a Cob"" Planet",3,True,34,898,63,39,3,0.3333333333333333
+35,0,"""On a Cob"" Planet",3,False,35,895,63,42,3,0.0
+36,0,"""On a Cob"" Planet",3,False,36,892,63,45,3,0.0
+37,0,"""On a Cob"" Planet",3,False,37,889,63,48,3,0.0
+38,0,"""On a Cob"" Planet",3,False,38,886,63,51,3,0.0
+39,0,"""On a Cob"" Planet",3,False,39,883,63,54,3,0.0
+40,0,"""On a Cob"" Planet",3,False,40,880,63,57,3,0.0
+41,0,"""On a Cob"" Planet",3,False,41,877,63,60,3,0.0
+42,0,"""On a Cob"" Planet",3,True,42,874,66,60,3,0.3333333333333333
+43,0,"""On a Cob"" Planet",3,True,43,871,69,60,3,0.3333333333333333
+44,0,"""On a Cob"" Planet",3,True,44,868,72,60,3,0.3333333333333333
+45,0,"""On a Cob"" Planet",3,True,45,865,75,60,3,0.3333333333333333
+46,0,"""On a Cob"" Planet",3,True,46,862,78,60,3,0.3333333333333333
+47,0,"""On a Cob"" Planet",3,False,47,859,78,63,3,0.0
+48,0,"""On a Cob"" Planet",3,False,48,856,78,66,3,0.0
+49,0,"""On a Cob"" Planet",3,True,49,853,81,66,3,0.3333333333333333
+50,0,"""On a Cob"" Planet",3,True,50,850,84,66,3,0.3333333333333333
+51,0,"""On a Cob"" Planet",3,True,51,847,87,66,3,0.3333333333333333
+52,0,"""On a Cob"" Planet",3,True,52,844,90,66,3,0.3333333333333333
+53,0,"""On a Cob"" Planet",3,True,53,841,93,66,3,0.3333333333333333
+54,0,"""On a Cob"" Planet",3,False,54,838,93,69,3,0.0
+55,0,"""On a Cob"" Planet",3,True,55,835,96,69,3,0.3333333333333333
+56,0,"""On a Cob"" Planet",3,False,56,832,96,72,3,0.0
+57,0,"""On a Cob"" Planet",3,False,57,829,96,75,3,0.0
+58,0,"""On a Cob"" Planet",3,False,58,826,96,78,3,0.0
+59,0,"""On a Cob"" Planet",3,False,59,823,96,81,3,0.0
+60,0,"""On a Cob"" Planet",3,False,60,820,96,84,3,0.0
+61,0,"""On a Cob"" Planet",3,True,61,817,99,84,3,0.3333333333333333
+62,0,"""On a Cob"" Planet",3,True,62,814,102,84,3,0.3333333333333333
+63,0,"""On a Cob"" Planet",3,True,63,811,105,84,3,0.3333333333333333
+64,0,"""On a Cob"" Planet",3,True,64,808,108,84,3,0.3333333333333333
+65,0,"""On a Cob"" Planet",3,False,65,805,108,87,3,0.0
+66,0,"""On a Cob"" Planet",3,False,66,802,108,90,3,0.0
+67,0,"""On a Cob"" Planet",3,False,67,799,108,93,3,0.0
+68,0,"""On a Cob"" Planet",3,False,68,796,108,96,3,0.0
+69,0,"""On a Cob"" Planet",3,False,69,793,108,99,3,0.0
+70,0,"""On a Cob"" Planet",3,False,70,790,108,102,3,0.0
+71,0,"""On a Cob"" Planet",3,True,71,787,111,102,3,0.3333333333333333
+72,0,"""On a Cob"" Planet",3,True,72,784,114,102,3,0.3333333333333333
+73,0,"""On a Cob"" Planet",3,True,73,781,117,102,3,0.3333333333333333
+74,0,"""On a Cob"" Planet",3,True,74,778,120,102,3,0.3333333333333333
+75,0,"""On a Cob"" Planet",3,True,75,775,123,102,3,0.3333333333333333
+76,0,"""On a Cob"" Planet",3,False,76,772,123,105,3,0.0
+77,0,"""On a Cob"" Planet",3,False,77,769,123,108,3,0.0
+78,0,"""On a Cob"" Planet",3,False,78,766,123,111,3,0.0
+79,0,"""On a Cob"" Planet",3,True,79,763,126,111,3,0.3333333333333333
+80,0,"""On a Cob"" Planet",3,True,80,760,129,111,3,0.3333333333333333
+81,0,"""On a Cob"" Planet",3,True,81,757,132,111,3,0.3333333333333333
+82,0,"""On a Cob"" Planet",3,True,82,754,135,111,3,0.3333333333333333
+83,0,"""On a Cob"" Planet",3,True,83,751,138,111,3,0.3333333333333333
+84,0,"""On a Cob"" Planet",3,True,84,748,141,111,3,0.3333333333333333
+85,0,"""On a Cob"" Planet",3,True,85,745,144,111,3,0.3333333333333333
+86,0,"""On a Cob"" Planet",3,False,86,742,144,114,3,0.0
+87,0,"""On a Cob"" Planet",3,False,87,739,144,117,3,0.0
+88,0,"""On a Cob"" Planet",3,True,88,736,147,117,3,0.3333333333333333
+89,0,"""On a Cob"" Planet",3,False,89,733,147,120,3,0.0
+90,0,"""On a Cob"" Planet",3,True,90,730,150,120,3,0.3333333333333333
+91,0,"""On a Cob"" Planet",3,True,91,727,153,120,3,0.3333333333333333
+92,0,"""On a Cob"" Planet",3,True,92,724,156,120,3,0.3333333333333333
+93,0,"""On a Cob"" Planet",3,True,93,721,159,120,3,0.3333333333333333
+94,0,"""On a Cob"" Planet",3,True,94,718,162,120,3,0.3333333333333333
+95,0,"""On a Cob"" Planet",3,True,95,715,165,120,3,0.3333333333333333
+96,0,"""On a Cob"" Planet",3,False,96,712,165,123,3,0.0
+97,0,"""On a Cob"" Planet",3,False,97,709,165,126,3,0.0
+98,0,"""On a Cob"" Planet",3,False,98,706,165,129,3,0.0
+99,0,"""On a Cob"" Planet",3,False,99,703,165,132,3,0.0
+100,0,"""On a Cob"" Planet",3,False,100,700,165,135,3,0.0
+101,0,"""On a Cob"" Planet",3,True,101,697,168,135,3,0.3333333333333333
+102,0,"""On a Cob"" Planet",3,True,102,694,171,135,3,0.3333333333333333
+103,0,"""On a Cob"" Planet",3,True,103,691,174,135,3,0.3333333333333333
+104,0,"""On a Cob"" Planet",3,False,104,688,174,138,3,0.0
+105,0,"""On a Cob"" Planet",3,True,105,685,177,138,3,0.3333333333333333
+106,0,"""On a Cob"" Planet",3,True,106,682,180,138,3,0.3333333333333333
+107,0,"""On a Cob"" Planet",3,True,107,679,183,138,3,0.3333333333333333
+108,0,"""On a Cob"" Planet",3,False,108,676,183,141,3,0.0
+109,0,"""On a Cob"" Planet",3,True,109,673,186,141,3,0.3333333333333333
+110,0,"""On a Cob"" Planet",3,True,110,670,189,141,3,0.3333333333333333
+111,0,"""On a Cob"" Planet",3,True,111,667,192,141,3,0.3333333333333333
+112,0,"""On a Cob"" Planet",3,True,112,664,195,141,3,0.3333333333333333
+113,0,"""On a Cob"" Planet",3,True,113,661,198,141,3,0.3333333333333333
+114,0,"""On a Cob"" Planet",3,True,114,658,201,141,3,0.3333333333333333
+115,0,"""On a Cob"" Planet",3,True,115,655,204,141,3,0.3333333333333333
+116,0,"""On a Cob"" Planet",3,False,116,652,204,144,3,0.0
+117,0,"""On a Cob"" Planet",3,False,117,649,204,147,3,0.0
+118,0,"""On a Cob"" Planet",3,False,118,646,204,150,3,0.0
+119,0,"""On a Cob"" Planet",3,True,119,643,207,150,3,0.3333333333333333
+120,0,"""On a Cob"" Planet",3,True,120,640,210,150,3,0.3333333333333333
+121,0,"""On a Cob"" Planet",3,True,121,637,213,150,3,0.3333333333333333
+122,0,"""On a Cob"" Planet",3,True,122,634,216,150,3,0.3333333333333333
+123,0,"""On a Cob"" Planet",3,True,123,631,219,150,3,0.3333333333333333
+124,0,"""On a Cob"" Planet",3,True,124,628,222,150,3,0.3333333333333333
+125,0,"""On a Cob"" Planet",3,False,125,625,222,153,3,0.0
+126,0,"""On a Cob"" Planet",3,False,126,622,222,156,3,0.0
+127,0,"""On a Cob"" Planet",3,False,127,619,222,159,3,0.0
+128,0,"""On a Cob"" Planet",3,False,128,616,222,162,3,0.0
+129,0,"""On a Cob"" Planet",3,False,129,613,222,165,3,0.0
+130,0,"""On a Cob"" Planet",3,True,130,610,225,165,3,0.3333333333333333
+131,0,"""On a Cob"" Planet",3,True,131,607,228,165,3,0.3333333333333333
+132,0,"""On a Cob"" Planet",3,True,132,604,231,165,3,0.3333333333333333
+133,0,"""On a Cob"" Planet",3,True,133,601,234,165,3,0.3333333333333333
+134,0,"""On a Cob"" Planet",3,True,134,598,237,165,3,0.3333333333333333
+135,0,"""On a Cob"" Planet",3,False,135,595,237,168,3,0.0
+136,0,"""On a Cob"" Planet",3,False,136,592,237,171,3,0.0
+137,0,"""On a Cob"" Planet",3,False,137,589,237,174,3,0.0
+138,0,"""On a Cob"" Planet",3,False,138,586,237,177,3,0.0
+139,0,"""On a Cob"" Planet",3,False,139,583,237,180,3,0.0
+140,0,"""On a Cob"" Planet",3,False,140,580,237,183,3,0.0
+141,0,"""On a Cob"" Planet",3,True,141,577,240,183,3,0.3333333333333333
+142,0,"""On a Cob"" Planet",3,True,142,574,243,183,3,0.3333333333333333
+143,0,"""On a Cob"" Planet",3,True,143,571,246,183,3,0.3333333333333333
+144,0,"""On a Cob"" Planet",3,True,144,568,249,183,3,0.3333333333333333
+145,0,"""On a Cob"" Planet",3,True,145,565,252,183,3,0.3333333333333333
+146,0,"""On a Cob"" Planet",3,False,146,562,252,186,3,0.0
+147,0,"""On a Cob"" Planet",3,False,147,559,252,189,3,0.0
+148,0,"""On a Cob"" Planet",3,False,148,556,252,192,3,0.0
+149,0,"""On a Cob"" Planet",3,True,149,553,255,192,3,0.3333333333333333
+150,0,"""On a Cob"" Planet",3,False,150,550,255,195,3,0.0
+1,1,Cronenberg World,3,False,151,547,255,198,3,0.0
+2,1,Cronenberg World,3,True,152,544,258,198,3,0.3333333333333333
+3,1,Cronenberg World,3,False,153,541,258,201,3,0.0
+4,1,Cronenberg World,3,True,154,538,261,201,3,0.3333333333333333
+5,1,Cronenberg World,3,True,155,535,264,201,3,0.3333333333333333
+6,1,Cronenberg World,3,True,156,532,267,201,3,0.3333333333333333
+7,1,Cronenberg World,3,True,157,529,270,201,3,0.3333333333333333
+8,1,Cronenberg World,3,True,158,526,273,201,3,0.3333333333333333
+9,1,Cronenberg World,3,True,159,523,276,201,3,0.3333333333333333
+10,1,Cronenberg World,3,True,160,520,279,201,3,0.3333333333333333
+11,1,Cronenberg World,3,True,161,517,282,201,3,0.3333333333333333
+12,1,Cronenberg World,3,False,162,514,282,204,3,0.0
+13,1,Cronenberg World,3,False,163,511,282,207,3,0.0
+14,1,Cronenberg World,3,True,164,508,285,207,3,0.3333333333333333
+15,1,Cronenberg World,3,False,165,505,285,210,3,0.0
+16,1,Cronenberg World,3,False,166,502,285,213,3,0.0
+17,1,Cronenberg World,3,False,167,499,285,216,3,0.0
+18,1,Cronenberg World,3,False,168,496,285,219,3,0.0
+19,1,Cronenberg World,3,False,169,493,285,222,3,0.0
+20,1,Cronenberg World,3,False,170,490,285,225,3,0.0
+21,1,Cronenberg World,3,False,171,487,285,228,3,0.0
+22,1,Cronenberg World,3,False,172,484,285,231,3,0.0
+23,1,Cronenberg World,3,False,173,481,285,234,3,0.0
+24,1,Cronenberg World,3,False,174,478,285,237,3,0.0
+25,1,Cronenberg World,3,True,175,475,288,237,3,0.3333333333333333
+26,1,Cronenberg World,3,False,176,472,288,240,3,0.0
+27,1,Cronenberg World,3,True,177,469,291,240,3,0.3333333333333333
+28,1,Cronenberg World,3,True,178,466,294,240,3,0.3333333333333333
+29,1,Cronenberg World,3,True,179,463,297,240,3,0.3333333333333333
+30,1,Cronenberg World,3,True,180,460,300,240,3,0.3333333333333333
+31,1,Cronenberg World,3,True,181,457,303,240,3,0.3333333333333333
+32,1,Cronenberg World,3,True,182,454,306,240,3,0.3333333333333333
+33,1,Cronenberg World,3,True,183,451,309,240,3,0.3333333333333333
+34,1,Cronenberg World,3,True,184,448,312,240,3,0.3333333333333333
+35,1,Cronenberg World,3,True,185,445,315,240,3,0.3333333333333333
+36,1,Cronenberg World,3,True,186,442,318,240,3,0.3333333333333333
+37,1,Cronenberg World,3,False,187,439,318,243,3,0.0
+38,1,Cronenberg World,3,False,188,436,318,246,3,0.0
+39,1,Cronenberg World,3,False,189,433,318,249,3,0.0
+40,1,Cronenberg World,3,False,190,430,318,252,3,0.0
+41,1,Cronenberg World,3,False,191,427,318,255,3,0.0
+42,1,Cronenberg World,3,False,192,424,318,258,3,0.0
+43,1,Cronenberg World,3,True,193,421,321,258,3,0.3333333333333333
+44,1,Cronenberg World,3,True,194,418,324,258,3,0.3333333333333333
+45,1,Cronenberg World,3,True,195,415,327,258,3,0.3333333333333333
+46,1,Cronenberg World,3,False,196,412,327,261,3,0.0
+47,1,Cronenberg World,3,True,197,409,330,261,3,0.3333333333333333
+48,1,Cronenberg World,3,True,198,406,333,261,3,0.3333333333333333
+49,1,Cronenberg World,3,True,199,403,336,261,3,0.3333333333333333
+50,1,Cronenberg World,3,True,200,400,339,261,3,0.3333333333333333
+51,1,Cronenberg World,3,True,201,397,342,261,3,0.3333333333333333
+52,1,Cronenberg World,3,True,202,394,345,261,3,0.3333333333333333
+53,1,Cronenberg World,3,True,203,391,348,261,3,0.3333333333333333
+54,1,Cronenberg World,3,True,204,388,351,261,3,0.3333333333333333
+55,1,Cronenberg World,3,True,205,385,354,261,3,0.3333333333333333
+56,1,Cronenberg World,3,False,206,382,354,264,3,0.0
+57,1,Cronenberg World,3,False,207,379,354,267,3,0.0
+58,1,Cronenberg World,3,False,208,376,354,270,3,0.0
+59,1,Cronenberg World,3,False,209,373,354,273,3,0.0
+60,1,Cronenberg World,3,False,210,370,354,276,3,0.0
+61,1,Cronenberg World,3,False,211,367,354,279,3,0.0
+62,1,Cronenberg World,3,False,212,364,354,282,3,0.0
+63,1,Cronenberg World,3,False,213,361,354,285,3,0.0
+64,1,Cronenberg World,3,False,214,358,354,288,3,0.0
+65,1,Cronenberg World,3,False,215,355,354,291,3,0.0
+66,1,Cronenberg World,3,True,216,352,357,291,3,0.3333333333333333
+67,1,Cronenberg World,3,False,217,349,357,294,3,0.0
+68,1,Cronenberg World,3,True,218,346,360,294,3,0.3333333333333333
+69,1,Cronenberg World,3,True,219,343,363,294,3,0.3333333333333333
+70,1,Cronenberg World,3,True,220,340,366,294,3,0.3333333333333333
+71,1,Cronenberg World,3,True,221,337,369,294,3,0.3333333333333333
+72,1,Cronenberg World,3,True,222,334,372,294,3,0.3333333333333333
+73,1,Cronenberg World,3,True,223,331,375,294,3,0.3333333333333333
+74,1,Cronenberg World,3,True,224,328,378,294,3,0.3333333333333333
+75,1,Cronenberg World,3,False,225,325,378,297,3,0.0
+76,1,Cronenberg World,3,False,226,322,378,300,3,0.0
+77,1,Cronenberg World,3,False,227,319,378,303,3,0.0
+78,1,Cronenberg World,3,False,228,316,378,306,3,0.0
+79,1,Cronenberg World,3,False,229,313,378,309,3,0.0
+80,1,Cronenberg World,3,False,230,310,378,312,3,0.0
+81,1,Cronenberg World,3,False,231,307,378,315,3,0.0
+82,1,Cronenberg World,3,False,232,304,378,318,3,0.0
+83,1,Cronenberg World,3,False,233,301,378,321,3,0.0
+84,1,Cronenberg World,3,True,234,298,381,321,3,0.3333333333333333
+85,1,Cronenberg World,3,False,235,295,381,324,3,0.0
+86,1,Cronenberg World,3,False,236,292,381,327,3,0.0
+87,1,Cronenberg World,3,False,237,289,381,330,3,0.0
+88,1,Cronenberg World,3,True,238,286,384,330,3,0.3333333333333333
+89,1,Cronenberg World,3,True,239,283,387,330,3,0.3333333333333333
+90,1,Cronenberg World,3,True,240,280,390,330,3,0.3333333333333333
+91,1,Cronenberg World,3,True,241,277,393,330,3,0.3333333333333333
+92,1,Cronenberg World,3,False,242,274,393,333,3,0.0
+93,1,Cronenberg World,3,True,243,271,396,333,3,0.3333333333333333
+94,1,Cronenberg World,3,True,244,268,399,333,3,0.3333333333333333
+95,1,Cronenberg World,3,False,245,265,399,336,3,0.0
+96,1,Cronenberg World,3,False,246,262,399,339,3,0.0
+97,1,Cronenberg World,3,False,247,259,399,342,3,0.0
+98,1,Cronenberg World,3,False,248,256,399,345,3,0.0
+99,1,Cronenberg World,3,True,249,253,402,345,3,0.3333333333333333
+100,1,Cronenberg World,3,False,250,250,402,348,3,0.0
+101,1,Cronenberg World,3,False,251,247,402,351,3,0.0
+102,1,Cronenberg World,3,False,252,244,402,354,3,0.0
+103,1,Cronenberg World,3,False,253,241,402,357,3,0.0
+104,1,Cronenberg World,3,False,254,238,402,360,3,0.0
+105,1,Cronenberg World,3,False,255,235,402,363,3,0.0
+106,1,Cronenberg World,3,True,256,232,405,363,3,0.3333333333333333
+107,1,Cronenberg World,3,True,257,229,408,363,3,0.3333333333333333
+108,1,Cronenberg World,3,True,258,226,411,363,3,0.3333333333333333
+109,1,Cronenberg World,3,True,259,223,414,363,3,0.3333333333333333
+110,1,Cronenberg World,3,True,260,220,417,363,3,0.3333333333333333
+111,1,Cronenberg World,3,True,261,217,420,363,3,0.3333333333333333
+112,1,Cronenberg World,3,False,262,214,420,366,3,0.0
+113,1,Cronenberg World,3,True,263,211,423,366,3,0.3333333333333333
+114,1,Cronenberg World,3,True,264,208,426,366,3,0.3333333333333333
+115,1,Cronenberg World,3,False,265,205,426,369,3,0.0
+116,1,Cronenberg World,3,True,266,202,429,369,3,0.3333333333333333
+117,1,Cronenberg World,3,False,267,199,429,372,3,0.0
+118,1,Cronenberg World,3,False,268,196,429,375,3,0.0
+119,1,Cronenberg World,3,False,269,193,429,378,3,0.0
+120,1,Cronenberg World,3,False,270,190,429,381,3,0.0
+121,1,Cronenberg World,3,False,271,187,429,384,3,0.0
+122,1,Cronenberg World,3,True,272,184,432,384,3,0.3333333333333333
+123,1,Cronenberg World,3,True,273,181,435,384,3,0.3333333333333333
+124,1,Cronenberg World,3,True,274,178,438,384,3,0.3333333333333333
+125,1,Cronenberg World,3,False,275,175,438,387,3,0.0
+126,1,Cronenberg World,3,True,276,172,441,387,3,0.3333333333333333
+127,1,Cronenberg World,3,True,277,169,444,387,3,0.3333333333333333
+128,1,Cronenberg World,3,True,278,166,447,387,3,0.3333333333333333
+129,1,Cronenberg World,3,True,279,163,450,387,3,0.3333333333333333
+130,1,Cronenberg World,3,True,280,160,453,387,3,0.3333333333333333
+131,1,Cronenberg World,3,True,281,157,456,387,3,0.3333333333333333
+132,1,Cronenberg World,3,True,282,154,459,387,3,0.3333333333333333
+133,1,Cronenberg World,3,False,283,151,459,390,3,0.0
+134,1,Cronenberg World,3,False,284,148,459,393,3,0.0
+135,1,Cronenberg World,3,False,285,145,459,396,3,0.0
+136,1,Cronenberg World,3,False,286,142,459,399,3,0.0
+137,1,Cronenberg World,3,True,287,139,462,399,3,0.3333333333333333
+138,1,Cronenberg World,3,False,288,136,462,402,3,0.0
+139,1,Cronenberg World,3,False,289,133,462,405,3,0.0
+140,1,Cronenberg World,3,False,290,130,462,408,3,0.0
+141,1,Cronenberg World,3,False,291,127,462,411,3,0.0
+142,1,Cronenberg World,3,False,292,124,462,414,3,0.0
+143,1,Cronenberg World,3,False,293,121,462,417,3,0.0
+144,1,Cronenberg World,3,True,294,118,465,417,3,0.3333333333333333
+145,1,Cronenberg World,3,True,295,115,468,417,3,0.3333333333333333
+146,1,Cronenberg World,3,True,296,112,471,417,3,0.3333333333333333
+147,1,Cronenberg World,3,True,297,109,474,417,3,0.3333333333333333
+148,1,Cronenberg World,3,True,298,106,477,417,3,0.3333333333333333
+149,1,Cronenberg World,3,True,299,103,480,417,3,0.3333333333333333
+150,1,Cronenberg World,3,True,300,100,483,417,3,0.3333333333333333
+1,2,The Purge Planet,3,False,301,97,483,420,3,0.0
+2,2,The Purge Planet,3,False,302,94,483,423,3,0.0
+3,2,The Purge Planet,3,False,303,91,483,426,3,0.0
+4,2,The Purge Planet,3,False,304,88,483,429,3,0.0
+5,2,The Purge Planet,3,False,305,85,483,432,3,0.0
+6,2,The Purge Planet,3,False,306,82,483,435,3,0.0
+7,2,The Purge Planet,3,False,307,79,483,438,3,0.0
+8,2,The Purge Planet,3,False,308,76,483,441,3,0.0
+9,2,The Purge Planet,3,False,309,73,483,444,3,0.0
+10,2,The Purge Planet,3,False,310,70,483,447,3,0.0
+11,2,The Purge Planet,3,False,311,67,483,450,3,0.0
+12,2,The Purge Planet,3,False,312,64,483,453,3,0.0
+13,2,The Purge Planet,3,False,313,61,483,456,3,0.0
+14,2,The Purge Planet,3,False,314,58,483,459,3,0.0
+15,2,The Purge Planet,3,False,315,55,483,462,3,0.0
+16,2,The Purge Planet,3,False,316,52,483,465,3,0.0
+17,2,The Purge Planet,3,False,317,49,483,468,3,0.0
+18,2,The Purge Planet,3,False,318,46,483,471,3,0.0
+19,2,The Purge Planet,3,False,319,43,483,474,3,0.0
+20,2,The Purge Planet,3,False,320,40,483,477,3,0.0
+21,2,The Purge Planet,3,False,321,37,483,480,3,0.0
+22,2,The Purge Planet,3,True,322,34,486,480,3,0.3333333333333333
+23,2,The Purge Planet,3,True,323,31,489,480,3,0.3333333333333333
+24,2,The Purge Planet,3,True,324,28,492,480,3,0.3333333333333333
+25,2,The Purge Planet,3,False,325,25,492,483,3,0.0
+26,2,The Purge Planet,3,False,326,22,492,486,3,0.0
+27,2,The Purge Planet,3,True,327,19,495,486,3,0.3333333333333333
+28,2,The Purge Planet,3,False,328,16,495,489,3,0.0
+29,2,The Purge Planet,3,True,329,13,498,489,3,0.3333333333333333
+30,2,The Purge Planet,3,True,330,10,501,489,3,0.3333333333333333
+31,2,The Purge Planet,3,False,331,7,501,492,3,0.0
+32,2,The Purge Planet,3,False,332,4,501,495,3,0.0
+33,2,The Purge Planet,3,False,333,1,501,498,3,0.0

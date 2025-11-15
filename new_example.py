@@ -15,12 +15,14 @@ import matplotlib.pyplot as plt
 
 from api_client import SphinxAPIClient
 from data_collector import DataCollector
-from visualizations import (
-    plot_survival_rates,
-    plot_survival_by_planet,
-    plot_moving_average,
-    plot_risk_evolution,
-    plot_episode_summary,
+
+# NEW visualization module (simplified & readable)
+from new_visualisation import (
+    plot_survival_heatmap,
+    plot_avg_steps,
+    plot_efficiency,
+    plot_risk_trend,
+    plot_ucb_scores,
 )
 
 # -------------------------------------------------------
@@ -31,55 +33,12 @@ def ensure_dirs():
     os.makedirs("outputs/data", exist_ok=True)
 
 # -------------------------------------------------------
-# Figure saving helper
-# -------------------------------------------------------
-def savefig(name):
-    path = f"outputs/figures/{name}.png"
-    plt.savefig(path, dpi=200, bbox_inches="tight")
-    plt.close()
-    print(f"📁 figure saved → {path}")
-
-# -------------------------------------------------------
-# 1) Distribution survie par planète
-# -------------------------------------------------------
-def plot_survival_distribution(df):
-    plt.figure(figsize=(10,6))
-
-    for planet in df["planet_name"].unique():
-        sub = df[df["planet_name"] == planet]
-        plt.hist(sub["survival_rate"], bins=20, alpha=0.4, label=planet)
-
-    plt.title("Distribution du taux de survie par planète")
-    plt.xlabel("Taux de survie")
-    plt.ylabel("Fréquence")
-    plt.legend()
-    savefig("distribution_survie")
-
-# -------------------------------------------------------
-# 2) Tradeoff survie ↔ rapidité
-# -------------------------------------------------------
-def plot_efficiency(df):
-    plt.figure(figsize=(8,6))
-
-    for planet in df["planet_name"].unique():
-        sub = df[df["planet_name"] == planet]
-        plt.scatter(sub["steps_taken"], sub["survival_rate"], alpha=0.5, label=planet)
-
-    plt.title("Trade-off entre survie et rapidité")
-    plt.xlabel("Nombre de steps")
-    plt.ylabel("Taux de survie")
-    plt.grid(alpha=0.3)
-    plt.legend()
-    savefig("efficiency")
-
-# -------------------------------------------------------
 # Save CSVs
 # -------------------------------------------------------
 def save_dataframes(full_df, summary_df):
     full_df.to_csv("outputs/data/exploration_data_ucb_ready.csv", index=False)
     summary_df.to_csv("outputs/data/summary_planet_stats.csv", index=False)
     print("📁 CSV saved in outputs/data/")
-
 
 # -------------------------------------------------------
 # MAIN SCRIPT
@@ -124,6 +83,7 @@ def main():
     summary_rows = []
     for (planet_idx, planet_name), sub in full_df.groupby(["planet", "planet_name"]):
         trip_rates = sub["survived"] / sub["morties_sent"]
+
         mean_sr = trip_rates.mean()
         var_sr = trip_rates.var(ddof=0)
         std_sr = np.sqrt(var_sr)
@@ -141,7 +101,8 @@ def main():
             "efficiency": efficiency,
         })
 
-        print(f"{planet_name} (index {planet_idx}) → mean={mean_sr:.3f}, std={std_sr:.3f}, efficiency={efficiency:.4f}")
+        print(f"{planet_name} (index {planet_idx}) → "
+              f"mean={mean_sr:.3f}, std={std_sr:.3f}, efficiency={efficiency:.4f}")
 
     summary_df = pd.DataFrame(summary_rows)
 
@@ -153,7 +114,7 @@ def main():
 
     print(summary_df)
 
-    # Step 6: Risk evolution
+    # Step 6: Risk evolution (collector side)
     print("\n6️⃣ Risk trend analysis...")
     risk_analysis = collector.analyze_risk_changes(full_df)
     for planet_name, data in risk_analysis.items():
@@ -166,27 +127,18 @@ def main():
     print("\n7️⃣ Saving data for strategy training...")
     save_dataframes(full_df, summary_df)
 
-    # Step 8: Visualizations
-    print("\n8️⃣ Saving visualizations...")
-    plot_survival_distribution(full_df)
+    # Step 8: NEW visualizations (clean & useful)
+    print("\n8️⃣ Saving improved visualizations...")
+
+    plot_survival_heatmap(full_df)
+    plot_avg_steps(full_df)
     plot_efficiency(full_df)
+    plot_risk_trend(full_df, window=50)
+    plot_ucb_scores(summary_df)
 
-    print("\n- Survival rates over time...")
-    plot_survival_rates(full_df)
-
-    print("- Planet comparison...")
-    plot_survival_by_planet(full_df)
-
-    print("- Moving averages...")
-    plot_moving_average(full_df, window=10)
-
-    print("- Risk evolution...")
-    plot_risk_evolution(full_df)
-
-    print("- Episode summary...")
-    plot_episode_summary(full_df)
-
-    print("\n✅ Analysis complete! Data is ready for UCB / Thompson Sampling strategies.")
+    print("\n✅ Analysis & visualizations complete!")
+    print("➡️ All data saved in outputs/data/")
+    print("➡️ All figures saved in outputs/figures/")
 
 
 if __name__ == "__main__":

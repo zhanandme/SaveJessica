@@ -6,20 +6,26 @@ import pandas as pd
 import numpy as np
 from typing import List, Dict, Tuple
 from api_client import SphinxAPIClient
+import os
+import glob
 
 
 class DataCollector:
     """Collects and analyzes data from the challenge."""
     
-    def __init__(self, client: SphinxAPIClient):
+    def __init__(self, client: SphinxAPIClient, output_dir: str = "outputs/data"):
         """
         Initialize the data collector.
         
         Args:
             client: SphinxAPIClient instance
+            output_dir: folder to save CSV files
         """
         self.client = client
         self.trips_data = []
+        self.output_dir = output_dir
+        os.makedirs(self.output_dir, exist_ok=True)
+    
     
     def explore_planet(self, planet: int, num_trips: int, morty_count: int = 1) -> pd.DataFrame:
         """
@@ -214,21 +220,32 @@ class DataCollector:
         
         return planet_index, planet_name
     
-    def save_data(self, filename: str = "trips_data.csv"):
+    
+    # --- explore_planet et explore_all_planets restent les mêmes ---
+    # --- on adapte juste la sauvegarde des CSV ---
+    
+    def save_data(self, morty_count: int = 1, planet: int = None, df: pd.DataFrame = None):
         """
-        Save collected trip data to a CSV file.
+        Save collected trip data to a CSV file in outputs/data.
         
         Args:
-            filename: Name of the CSV file
+            morty_count: number of Mortys used
+            planet: optional planet index to include in filename
+            df: optional DataFrame to save; if None, uses self.trips_data
         """
-        if self.trips_data:
+        if df is None:
+            if not self.trips_data:
+                print("No data to save")
+                return
             df = pd.DataFrame(self.trips_data)
-            df.to_csv(filename, index=False)
-            print(f"\nData saved to {filename}")
-        else:
-            print("No data to save")
+        
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        planet_str = f"_planet{planet}" if planet is not None else ""
+        filename = f"{self.output_dir}/morty{morty_count}{planet_str}_{timestamp}.csv"
+        df.to_csv(filename, index=False)
+        print(f"\n📁 Data saved to {filename}")
     
-    def load_data(self, filename: str = "trips_data.csv") -> pd.DataFrame:
+    def load_data(self, filename: str) -> pd.DataFrame:
         """
         Load trip data from a CSV file.
         
@@ -244,19 +261,46 @@ class DataCollector:
         return df
 
 
+
 if __name__ == "__main__":
-    # Example usage
     from api_client import SphinxAPIClient
-    
+    from datetime import datetime
+
     try:
         client = SphinxAPIClient()
         collector = DataCollector(client)
+        print("✅ Data Collector initialized!\n")
+
+        # Paramètres
+        trips_per_planet = 150      # nombre de trips par planète
+        morty_counts = [1, 2, 3]   # tester différents groupes de Mortys
+        planets = [0, 1, 2]        # toutes les planètes
+
+        # Exploration et sauvegarde
+        for morty_count in morty_counts:
+            print(f"\n=== Exploring all planets with {morty_count} Morty(ies) ===\n")
         
-        print("Data Collector initialized!")
-        print("\nTo explore planets, run:")
-        print("  df = collector.explore_all_planets(trips_per_planet=30)")
-        print("\nOr explore a single planet:")
-        print("  df = collector.explore_planet(planet=0, num_trips=50)")
-        
+            planet_dfs = []
+
+            for planet in planets:
+                # Explorer chaque planète
+                df = collector.explore_planet(planet, trips_per_planet, morty_count)
+
+                # Sauvegarder CSV de la planète uniquement si des trips ont réussi
+                if not df.empty:
+                    collector.save_data(morty_count=morty_count, planet=planet, df=df)
+                    planet_dfs.append(df)
+                else:
+                    print(f"⚠️ No successful trips for morty_count={morty_count} on planet {planet}, skipping CSV.")
+
+            # Combiner les DataFrames non vides pour ce nombre de Mortys
+            if planet_dfs:
+                combined_df = pd.concat(planet_dfs, ignore_index=True)
+                collector.save_data(morty_count=morty_count, planet=None, df=combined_df)
+            else:
+                print(f"⚠️ No data collected for morty_count={morty_count}, skipping combined CSV.")
+
+            print("\n✅ Exploration complete for this group! CSVs saved if data exists.\n")
+
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"❌ Error: {e}")

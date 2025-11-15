@@ -5,7 +5,7 @@ This script runs several strategies in sequence, collects their performance,
 and prints a summary of results.
 """
 
-from strategy import SimpleGreedyStrategy, AdaptiveStrategy, run_strategy, TrendSwitchStrategy, UCBStrategy, AdaptiveSurvivalStrategy
+from strategy import SimpleGreedyStrategy, AdaptiveStrategy, run_strategy, UCBStrategy, AdaptiveSurvivalStrategy, NewAdaptiveSurvivalStrategy
 from api_client import SphinxAPIClient
 
 
@@ -32,7 +32,7 @@ def evaluate_strategy(strategy_class, explore_trips=30):
     }
 
 def main():
-    strategies = [UCBStrategy]
+    strategies = [AdaptiveSurvivalStrategy, UCBStrategy]
     results = []
 
     for strategy_class in strategies:

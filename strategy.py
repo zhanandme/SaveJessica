@@ -528,10 +528,11 @@ class AdaptiveSurvivalStrategy(MortyRescueStrategy):
         morties_remaining = status.get('morties_in_citadel', 0)
 
         # exploration initiale si nécessaire
-        if self.exploration_data is None or self.exploration_data.empty:
+        if self.exploration_data is None or len(self.exploration_data) == 0:
             print("No exploration data — running initial exploration (30 trips/planet).")
             self.collector.explore_all_planets(trips_per_planet=30)
-            self.exploration_data = self.collector.trips_data
+            # convertir la liste en DataFrame
+            self.exploration_data = pd.DataFrame(self.collector.trips_data)
 
             # remplir full_history_by_planet
             for idx, row in self.exploration_data.iterrows():
@@ -710,6 +711,104 @@ class OptimizedMortyStrategy(MortyRescueStrategy):
         print(f"Morties Saved: {final_status['morties_on_planet_jessica']}")
         print(f"Morties Lost: {final_status['morties_lost']}")
         print(f"Success Rate: {(final_status['morties_on_planet_jessica']/total_morties)*100:.2f}%")
+
+
+
+class ThompsonCyclicStrategy(MortyRescueStrategy):
+    PLANET_PERIODS = {0: 10, 1: 20, 2: 200}
+
+    def __init__(self, client):
+        super().__init__(client)
+        # Beta parameters a=success+1, b=failure+1 for each phase of each planet
+        self.phase_stats: Dict[int, List[Tuple[int,int]]] = {
+            planet: [(1,1) for _ in range(period)]
+            for planet, period in self.PLANET_PERIODS.items()
+        }
+
+    def _current_phase(self, planet_idx: int, trip_num: int) -> int:
+        return trip_num % self.PLANET_PERIODS[planet_idx]
+
+    def _choose_planet(self, trip_num: int) -> int:
+        sampled_probs = {}
+        for planet, phases in self.phase_stats.items():
+            phase = self._current_phase(planet, trip_num)
+            a, b = phases[phase]
+            sampled_probs[planet] = random.betavariate(a, b)
+        best_planet = max(sampled_probs, key=sampled_probs.get)
+        return best_planet
+
+    def _choose_morties_count(self, planet_idx: int, trip_num: int) -> int:
+        phase = self._current_phase(planet_idx, trip_num)
+        a, b = self.phase_stats[planet_idx][phase]
+        prob = a / (a + b)
+        if prob > 0.7:
+            return 3
+        elif prob > 0.4:
+            return 2
+        else:
+            return 1
+
+    def execute_strategy(self, save_csv="thompson_cyclic_results.csv"):
+        print("\n=== EXECUTING THOMPSON CYCLIC STRATEGY ===")
+        status = self.client.get_status()
+        morties_remaining = status.get('morties_in_citadel', 0)
+        trip_num = 0
+
+        csv_rows = [["Trip", "Planet", "MortiesSent", "MortiesSaved",
+                     "SurvivedBool", "Phase", "Timestamp"]]
+
+        while morties_remaining > 0:
+            planet_idx = self._choose_planet(trip_num)
+            phase = self._current_phase(planet_idx, trip_num)
+            morties_to_send = self._choose_morties_count(planet_idx, trip_num)
+            morties_to_send = min(morties_to_send, morties_remaining)  # ✅ ne jamais envoyer plus que ce qui reste
+            result = self.client.send_morties(planet_idx, morties_to_send)
+            survived_field = result.get("survived")
+            survived_bool = bool(survived_field)
+            morties_saved = int(survived_field) if isinstance(survived_field,int) else int(survived_bool) * morties_to_send
+
+            # update Beta for this phase
+            a, b = self.phase_stats[planet_idx][phase]
+            if survived_bool:
+                a += 1
+            else:
+                b += 1
+            self.phase_stats[planet_idx][phase] = (a, b)
+
+            morties_remaining = result.get('morties_in_citadel', morties_remaining)
+            trip_num += 1
+
+            csv_rows.append([
+                trip_num, self.client.get_planet_name(planet_idx),
+                morties_to_send, morties_saved, int(survived_bool),
+                phase, datetime.utcnow().isoformat()
+            ])
+
+            if trip_num % 50 == 0 or morties_remaining <= 0:
+                print(f"Trip {trip_num}: Planet {self.client.get_planet_name(planet_idx)}, "
+                      f"Sent={morties_to_send}, Survived={survived_bool}, Phase={phase}, Remaining={morties_remaining}")
+
+            if trip_num > 20000:
+                print("Reached 20000 trips — aborting to avoid infinite loop.")
+                break
+
+        # save CSV
+        try:
+            with open(save_csv, mode="w", newline="") as f:
+                writer = csv.writer(f)
+                writer.writerows(csv_rows)
+            print(f"\n✅ Results saved to {save_csv}")
+        except Exception as e:
+            print(f"Error saving CSV: {e}")
+
+        # final stats
+        final_status = self.client.get_status()
+        total_possible = final_status.get('morties_on_planet_jessica', 0) + final_status.get('morties_lost', 0)
+        success_pct = (final_status.get('morties_on_planet_jessica', 0) / total_possible * 100) if total_possible > 0 else 0.0
+        print("\n=== FINAL RESULTS ===")
+        print(f"Morties Saved: {final_status.get('morties_on_planet_jessica')}")
+        print(f"Morties Lost: {final_status.get('morties_lost')}")
+        print(f"Success Rate: {success_pct:.2f}%")
 
 """"
 class HybridUCBAdaptiveStrategy(MortyRescueStrategy):

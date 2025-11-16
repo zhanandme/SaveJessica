@@ -18,6 +18,10 @@ import random
 import csv
 import numpy as np
 from collections import deque
+from datetime import datetime
+from typing import Dict, List, Tuple
+
+
 
 
 class MortyRescueStrategy(ABC):
@@ -433,78 +437,266 @@ class UCBStrategy(MortyRescueStrategy):
         print(f"Success Rate: {(final_status['morties_on_planet_jessica']/total_morties)*100:.2f}%")
             
 
-class AdaptiveSurvivalStrategy(MortyRescueStrategy):
-    def execute_strategy(self, morties_per_trip=2, reevaluate_every=20, drop_threshold=0.4, save_csv="adaptive_results.csv"):
-        print("\n=== EXECUTING ADAPTIVE SURVIVAL STRATEGY ===")
-        
-        status = self.client.get_status()
-        morties_remaining = status['morties_in_citadel']
-        
-        current_planet, current_planet_name = self.collector.get_best_planet(
-            self.exploration_data,
-            consider_trend=True
-        )
-        print(f"Starting on planet: {current_planet_name}")
 
-        recent_results = []
-        total_trips = 0
+
+class AdaptiveSurvivalStrategy(MortyRescueStrategy):
+    """
+    Strategy that predicts next success based on planetary cycles and adapts
+    the number of Morties sent accordingly.
+    """
+
+    # périodes dominantes par planète
+    PLANET_PERIODS = {0: 10, 1: 20, 2: 200}
+
+    def __init__(self, client, collector):
+        super().__init__(client)
+        self.collector = collector
+        self.full_history_by_planet: Dict[int, List[int]] = {0: [], 1: [], 2: []}
+        self.exploration_data = None
+
+    # ---------------- Utils ----------------
+    def _normalize_survived(self, survived_field, morties_sent: int) -> Tuple[bool, int]:
+        """Retourne survived_bool et morties_saved."""
+        if isinstance(survived_field, bool):
+            return survived_field, int(survived_field) * morties_sent
+        try:
+            morties_saved = int(survived_field)
+            return morties_saved > 0, morties_saved
+        except Exception:
+            survived_bool = bool(survived_field)
+            return survived_bool, int(survived_bool) * morties_sent
+
+    def _record_trip(self, trip_num: int, planet_idx: int, planet_name: str,
+                     morties_sent: int, survived_field, result: dict):
+        survived_bool, morties_saved = self._normalize_survived(survived_field, morties_sent)
+
+        # update full history
+        self.full_history_by_planet.setdefault(planet_idx, [])
+        self.full_history_by_planet[planet_idx].append(1 if survived_bool else 0)
+
+        # store for CSV
+        row = {
+            "trip_number": trip_num,
+            "planet": planet_idx,
+            "planet_name": planet_name,
+            "morties_sent": morties_sent,
+            "survived": int(survived_bool),
+            "morties_saved": morties_saved,
+            "morties_in_citadel": result.get("morties_in_citadel"),
+            "morties_on_planet_jessica": result.get("morties_on_planet_jessica"),
+            "morties_lost": result.get("morties_lost"),
+            "timestamp": datetime.utcnow().isoformat()
+        }
+
+        if self.exploration_data is None:
+            import pandas as pd
+            self.exploration_data = pd.DataFrame(columns=row.keys())
+        import pandas as pd
+        self.exploration_data = pd.concat([self.exploration_data, pd.DataFrame([row])], ignore_index=True)
+
+    def _predict_next_success(self, planet_idx: int, trip_num: int) -> float:
+        """Prévoit le succès du prochain trip en fonction de la période."""
+        period = self.PLANET_PERIODS[planet_idx]
+        history = self.full_history_by_planet.get(planet_idx, [])
+
+        if len(history) < period:
+            return sum(history)/max(1, len(history))
+
+        # score moyen sur la dernière période complète
+        last_period = history[-period:]
+        score_last = sum(last_period)/period
+
+        # phase actuelle (0-1)
+        phase = (trip_num % period) / period
+        # hypothèse : meilleures phases au centre du cycle
+        return score_last * (1 + 0.5 * (0.5 - abs(phase - 0.5)))
+
+    def _choose_best_planet(self, trip_num: int) -> Tuple[int, str]:
+        """Choisit la planète avec la meilleure prédiction de succès."""
+        scores: Dict[int, float] = {}
+        for p in [0, 1, 2]:
+            scores[p] = self._predict_next_success(p, trip_num)
+
+        best_idx = max(scores, key=scores.get)
+        return best_idx, self.client.get_planet_name(best_idx)
+
+    # ---------------- Stratégie principale ----------------
+    def execute_strategy(self, morties_per_trip=2, reevaluate_every=20,
+                         drop_threshold=0.4, save_csv="adaptive_predicted.csv"):
+        print("\n=== EXECUTING ADAPTIVE PREDICTIVE STRATEGY ===")
+        status = self.client.get_status()
+        morties_remaining = status.get('morties_in_citadel', 0)
+
+        # exploration initiale si nécessaire
+        if self.exploration_data is None or self.exploration_data.empty:
+            print("No exploration data — running initial exploration (30 trips/planet).")
+            self.collector.explore_all_planets(trips_per_planet=30)
+            self.exploration_data = self.collector.trips_data
+
+            # remplir full_history_by_planet
+            for idx, row in self.exploration_data.iterrows():
+                planet_idx = row['planet']
+                survived = row['survived']
+                self.full_history_by_planet.setdefault(planet_idx, [])
+                self.full_history_by_planet[planet_idx].append(int(survived))
+
+        trip_num = 0
+        current_planet, current_planet_name = self._choose_best_planet(trip_num)
+
+        csv_rows = [["Trip", "Planet", "MortiesSent", "MortiesSaved", "SurvivedBool",
+                     "PredictedSuccess", "Timestamp"]]
+
         consecutive_losses = 0
 
-        # CSV setup
-        csv_rows = [["Trip", "Planet", "MortiesSent", "Survived", "SurvivalRate", "PlanetReevaluated"]]
-
         while morties_remaining > 0:
-            # Adapter le nombre de Mortys à envoyer
-            if len(recent_results) >= 5:
-                recent_success = sum(recent_results[-5:]) / 5
-            else:
-                recent_success = sum(recent_results) / max(1, len(recent_results))
-            
-            if recent_success >= 0.7: #0.7
-                morties_to_send = min(3, morties_remaining)
-            elif recent_success >= 0.4: #0.4
-                morties_to_send = min(2, morties_remaining)
-            else:
-                morties_to_send = 1
+            predicted_success = self._predict_next_success(current_planet, trip_num)
 
-            result = self.client.send_morties(current_planet, morties_to_send)
-            morties_remaining = result['morties_in_citadel']
-            survived = result['survived']
-
-            recent_results.append(1 if survived else 0)
-            total_trips += 1
-
-            print(f"Trip {total_trips}: Sent {morties_to_send}, Survived: {survived}")
-
-            # Compter les pertes consécutives
-            if not survived:
-                consecutive_losses += 1
-            else:
-                consecutive_losses = 0
-
-            # Si trop de pertes consécutives, réduire temporairement les Mortys
+            # adapter le nombre de morties
             if consecutive_losses >= 3:
                 morties_to_send = 1
+            else:
+                if predicted_success > 0.7:
+                    morties_to_send = min(3, morties_remaining)
+                elif predicted_success > 0.4:
+                    morties_to_send = min(2, morties_remaining)
+                else:
+                    morties_to_send = 1
 
-            planet_reevaluated = False
+            # envoyer
+            result = self.client.send_morties(current_planet, morties_to_send)
+            morties_remaining = result.get('morties_in_citadel', morties_remaining)
+            survived_bool, morties_saved = self._normalize_survived(result.get('survived'), morties_to_send)
+            consecutive_losses = 0 if survived_bool else consecutive_losses + 1
 
-            # Réévaluer la planète tous les 'reevaluate_every' trips
-            if total_trips % reevaluate_every == 0 and morties_remaining > 0:
-                recent_success_window = sum(recent_results[-reevaluate_every:]) / reevaluate_every
-                print(f"Trip {total_trips}: Recent success rate {recent_success_window*100:.2f}%")
-                
-                if recent_success_window < (1 - drop_threshold):
-                    print("  ⚠️ Performance drop detected! Re-evaluating best planet...")
-                    current_planet, current_planet_name = self.collector.get_best_planet(
-                        self.exploration_data,
-                        consider_trend=True
-                    )
-                    print(f"  → Switching to planet: {current_planet_name}")
-                    planet_reevaluated = True
+            trip_num += 1
 
-            # Ajouter ligne CSV
-            survival_rate = survived / morties_to_send if morties_to_send > 0 else 0
-            csv_rows.append([total_trips, current_planet_name, morties_to_send, survived, survival_rate, planet_reevaluated])
+            # enregistrer
+            self._record_trip(trip_num, current_planet, current_planet_name,
+                              morties_to_send, survived_bool, result)
+
+            csv_rows.append([
+                trip_num, current_planet_name, morties_to_send, morties_saved,
+                int(survived_bool), f"{predicted_success:.2f}", datetime.utcnow().isoformat()
+            ])
+
+            # réévaluation périodique
+            if trip_num % reevaluate_every == 0 and morties_remaining > 0:
+                current_planet, current_planet_name = self._choose_best_planet(trip_num)
+
+            if trip_num > 20000:
+                print("Reached 20000 trips — aborting to avoid infinite loop.")
+                break
+
+        # sauver CSV
+        try:
+            with open(save_csv, mode="w", newline="") as f:
+                writer = csv.writer(f)
+                writer.writerows(csv_rows)
+            print(f"\n✅ Results saved to {save_csv}")
+        except Exception as e:
+            print(f"Error saving CSV: {e}")
+
+        # stats finales
+        final_status = self.client.get_status()
+        total_possible = final_status.get('morties_on_planet_jessica', 0) + final_status.get('morties_lost', 0)
+        success_pct = (final_status.get('morties_on_planet_jessica', 0) / total_possible * 100) if total_possible > 0 else 0.0
+
+        print("\n=== FINAL RESULTS ===")
+        print(f"Morties Saved: {final_status.get('morties_on_planet_jessica')}")
+        print(f"Morties Lost: {final_status.get('morties_lost')}")
+        print(f"Success Rate: {success_pct:.2f}%")
+
+class OptimizedMortyStrategy(MortyRescueStrategy):
+    def execute_strategy(
+        self,
+        morties_per_trip=3,
+        c=1.5,
+        window_size=10,
+        reevaluate_every=50,
+        save_csv="optimized_results.csv"
+    ):
+        """
+        Fusion of UCB and Adaptive Survival strategy:
+        - UCB for planet selection
+        - Adaptive number of Mortys per trip based on recent success
+        - Takes into account the professor's hint about planet 2
+        """
+        print("\n=== EXECUTING OPTIMIZED STRATEGY ===")
+
+        status = self.client.get_status()
+        morties_remaining = status["morties_in_citadel"]
+        total_morties = 1000
+        n_planets = 3
+        n = 0  # total trips
+
+        planet_stats = {
+            i: {
+                "successes": 0,
+                "trials": 0,
+                "history": deque(maxlen=window_size)
+            }
+            for i in range(n_planets)
+        }
+
+        # --- Initial exploration (send 1 Morty per planet) ---
+        print("\nInitial exploration...")
+        for planet in range(n_planets):
+            if morties_remaining <= 0:
+                break
+            to_send = 1
+            # Prof's hint: boost initial exploration on planet 2
+            if planet == 1:
+                to_send = min(2, morties_remaining)
+
+            result = self.client.send_morties(planet, to_send)
+            survived = result["survived"]
+
+            planet_stats[planet]["successes"] += survived
+            planet_stats[planet]["trials"] += 1
+            planet_stats[planet]["history"].append(survived / to_send)
+
+            morties_remaining = result["morties_in_citadel"]
+            n += 1
+
+            print(f"  Planet {self.client.get_planet_name(planet)}: Survival={survived/to_send:.2f}")
+
+        # --- Main loop ---
+        csv_rows = [["Trip", "Planet", "MortiesSent", "Survived", "SurvivalRate", "UCB"]]
+
+        while morties_remaining > 0:
+            # Calculate UCB scores
+            ucb_scores = {}
+            for planet in range(n_planets):
+                trials = planet_stats[planet]["trials"]
+                mean = sum(planet_stats[planet]["history"]) / len(planet_stats[planet]["history"]) if planet_stats[planet]["history"] else 0
+                ucb_scores[planet] = mean + c * math.sqrt((2 * math.log(n)) / trials) if trials > 0 else float("inf")
+
+            # Select best planet according to UCB
+            best_planet = max(ucb_scores, key=ucb_scores.get)
+            planet_name = self.client.get_planet_name(best_planet)
+
+            # Adaptive number of Mortys based on recent success
+            recent_rate = sum(planet_stats[best_planet]["history"]) / len(planet_stats[best_planet]["history"]) if planet_stats[best_planet]["history"] else 0
+            # Nombre adaptatif
+            morties_to_send = max(1, int(morties_per_trip * recent_rate + 0.5))
+            # Ne jamais dépasser les Mortys restants
+            morties_to_send = min(morties_to_send, morties_remaining)
+
+            result = self.client.send_morties(best_planet, morties_to_send)
+            survived = result["survived"]
+
+            # Update stats
+            planet_stats[best_planet]["successes"] += survived
+            planet_stats[best_planet]["trials"] += 1
+            planet_stats[best_planet]["history"].append(survived / morties_to_send)
+
+            morties_remaining = result["morties_in_citadel"]
+            n += 1
+
+            csv_rows.append([n, planet_name, morties_to_send, survived, sum(planet_stats[best_planet]["history"])/len(planet_stats[best_planet]["history"]), ucb_scores.get(best_planet, 0)])
+
+            if n % 20 == 0 or morties_remaining <= 0:
+                print(f"Trip {n}: Sent {morties_to_send} to {planet_name} | recent_rate={recent_rate:.2f} | UCB={ucb_scores[best_planet]:.2f} | Remaining={morties_remaining}")
 
         # --- Save CSV ---
         with open(save_csv, mode="w", newline="") as f:
@@ -512,11 +704,12 @@ class AdaptiveSurvivalStrategy(MortyRescueStrategy):
             writer.writerows(csv_rows)
         print(f"\n✅ Results saved to {save_csv}")
 
+        # --- Final results ---
         final_status = self.client.get_status()
         print("\n=== FINAL RESULTS ===")
         print(f"Morties Saved: {final_status['morties_on_planet_jessica']}")
         print(f"Morties Lost: {final_status['morties_lost']}")
-        print(f"Success Rate: {(final_status['morties_on_planet_jessica']/1000)*100:.2f}%")
+        print(f"Success Rate: {(final_status['morties_on_planet_jessica']/total_morties)*100:.2f}%")
 
 """"
 class HybridUCBAdaptiveStrategy(MortyRescueStrategy):

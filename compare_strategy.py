@@ -5,14 +5,14 @@ This script runs several strategies in sequence, collects their performance,
 and prints a summary of results.
 """
 
-from strategy import SimpleGreedyStrategy, AdaptiveStrategy, run_strategy, UCBStrategy, AdaptiveSurvivalStrategy, NewAdaptiveSurvivalStrategy
+from data_collector import DataCollector
+from strategy import SimpleGreedyStrategy, AdaptiveStrategy, run_strategy, UCBStrategy, AdaptiveSurvivalStrategy, NewAdaptiveSurvivalStrategy, OptimizedMortyStrategy
 from api_client import SphinxAPIClient
 
-
-def evaluate_strategy(strategy_class, explore_trips=30):
+def evaluate_strategy(strategy_class, client: SphinxAPIClient, collector: DataCollector, explore_trips=30):
     """Run a single strategy and return its final results."""
-    client = SphinxAPIClient()
-    strategy = strategy_class(client)
+    # Passer client et collector à la stratégie
+    strategy = strategy_class(client, collector)
 
     client.start_episode()
     strategy.explore_phase(trips_per_planet=explore_trips)
@@ -31,15 +31,19 @@ def evaluate_strategy(strategy_class, explore_trips=30):
         "success_rate": success_rate,
     }
 
+
 def main():
-    strategies = [AdaptiveSurvivalStrategy, UCBStrategy]
+    client = SphinxAPIClient()
+    collector = DataCollector(client)
+
+    strategies = [AdaptiveSurvivalStrategy]
     results = []
 
     for strategy_class in strategies:
         print("\n" + "="*60)
         print(f"Running strategy: {strategy_class.__name__}")
         print("="*60)
-        result = evaluate_strategy(strategy_class, explore_trips=30)
+        result = evaluate_strategy(strategy_class, client, collector, explore_trips=30)
         results.append(result)
 
     print("\n=== COMPARISON RESULTS ===")

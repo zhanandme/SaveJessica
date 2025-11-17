@@ -1,4 +1,0 @@
-TO DO:
--Affiner les distrbutions sur chaque planète, comprendre la distrbution pour chaque planète; 
--Voir si ça va plus vite si on envoie 3 Mortys à chaque trip;
--Adapter AdaptiveStrategie pour chnger les planètes;

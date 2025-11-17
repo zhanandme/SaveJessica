@@ -226,15 +226,7 @@ class NewAdaptiveSurvivalStrategy(MortyRescueStrategy):
         morties_per_trip: int = 3,
         reevaluate_every: int = 50,
         min_survival_threshold: float = 0.3
-    ):
-        """
-        Execute the adaptive survival strategy.
-        
-        Args:
-            morties_per_trip: Max number of Morties to send per trip (1-3)
-            reevaluate_every: Re-evaluate the planet every N trips
-            min_survival_threshold: If recent survival rate < threshold, consider switching planet
-        """
+        ):
         print("\n=== EXECUTING ADAPTIVE SURVIVAL STRATEGY ===")
         
         status = self.client.get_status()

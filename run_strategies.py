@@ -51,7 +51,7 @@ def main():
         print(f"  Success Rate: {r['success_rate']:.2f}%")
 
     best = max(results, key=lambda x: x["saved"])
-    print("\n🏆 Best strategy:", best["strategy"], f"({best['success_rate']:.2f}% success)")
+    print("\n Best strategy:", best["strategy"], f"({best['success_rate']:.2f}% success)")
 
 if __name__ == "__main__":
     main()

@@ -363,7 +363,7 @@ class AdaptiveSurvivalStrategy(MortyRescueStrategy):
 
             # --- forced exploration every X trips ---
             if total_trips % exploration_cycle == 0:
-                print("\n🔍 FORCED EXPLORATION CYCLE: Checking all planets…")
+                print("\nExploration cycle")
                 new_planet, new_name = self.collector.get_best_planet(self.exploration_data, consider_trend=True)
                 current_planet = new_planet
                 current_planet_name = new_name
@@ -373,10 +373,10 @@ class AdaptiveSurvivalStrategy(MortyRescueStrategy):
             # --- periodic performance check ---
             if total_trips % reevaluate_every == 0 and reevaluation_cooldown == 0:
                 window_perf = sum(recent_results) / len(recent_results)
-                print(f"  → Reevaluating: window perf = {window_perf:.2f}")
+                print(f"-> Reevaluating: window perf = {window_perf:.2f}")
 
                 if window_perf < switch_threshold:
-                    print("  ⚠️ Performance drop → switching planet")
+                    print("Performance below threshold -> switching planet")
                     new_planet, new_name = self.collector.get_best_planet(self.exploration_data, consider_trend=True)
                     current_planet = new_planet
                     current_planet_name = new_name
@@ -385,7 +385,7 @@ class AdaptiveSurvivalStrategy(MortyRescueStrategy):
 
             # --- optional boost for planet 2 (if it's historically best in your game) ---
             if current_planet == 2 and total_trips % 50 == 0:
-                print("🔁 Returning to planet 2 for periodic high-yield check")
+                print("Returning to planet 2 as a boost strategy")
 
             # --- log CSV ---
             csv_rows.append([

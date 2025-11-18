@@ -21,9 +21,6 @@ from collections import deque
 from datetime import datetime
 from typing import Dict, List, Tuple
 
-
-
-
 class MortyRescueStrategy(ABC):
     """Abstract base class for implementing rescue strategies."""
     
@@ -77,8 +74,9 @@ class MortyRescueStrategy(ABC):
         pass
 
 
-# Choisit la planète avec le meilleur taux de survie moyen pendant l’exploration, et y envoie tous les Morties.
-# Ne s’adapte pas aux changements (si la planète devient dangereuse)
+
+# Score : [40%, 43%] 
+# Review : Too easy, does not adapt to changing planet conditions + not robust
 class SimpleGreedyStrategy(MortyRescueStrategy):
     """
     Simple greedy strategy: always pick the planet with highest recent success.
@@ -134,12 +132,13 @@ class SimpleGreedyStrategy(MortyRescueStrategy):
         print(f"Success Rate: {(final_status['morties_on_planet_jessica']/1000)*100:.2f}%")
 
 
-# Re-évalue tous les N voyages (reevaluate_every), mais ne change pas encore réellement de planète.
-# Le changement de planète n’est pas implémenté.
+
+# Score : [45%, 48%]
+# Review : It can be improved by adding planet switching, see AdaptiveStrategy below
 class AdaptiveStrategy(MortyRescueStrategy):
     """
     Adaptive strategy: continuously monitor and switch planets if needed.
-    """
+ """
     
     def execute_strategy(
         self,
@@ -215,10 +214,22 @@ class AdaptiveStrategy(MortyRescueStrategy):
         print(f"Total Steps: {final_status['steps_taken']}")
         print(f"Success Rate: {(final_status['morties_on_planet_jessica']/1000)*100:.2f}%")
 
+
+
+# Score : [47%, 66%]
+# Review : Enhanced UCB strategy with adaptive morty sending based on recent performance but needs more tuning(didn't succeed)
+# Results are variable due to randomness, and we could not reach a good score consistently despite our research.
 class UCBStrategy(MortyRescueStrategy):
-    def execute_strategy(self, morties_per_trip=3, c=1.5, window_size=10, reevaluate_every=200, save_csv="ucb_results.csv"):
+    def execute_strategy(self, morties_per_trip=3, c=1.5, window_size=10, reevaluate_every=200, save_csv="outputs/data/ucb_results.csv"):
         """
         Adaptive Upper Confidence Bound strategy with reevaluation every `reevaluate_every` trips.
+        Args:
+            morties_per_trip: Number of Morties to send per trip (1-3)
+            c: Exploration parameter for UCB
+            window_size: Size of the moving window for recent performance
+            reevaluate_every: Number of trips between UCB score recalculations
+            save_csv: Filename to save the results CSV
+        Better performance by adjusting morties sent based on recent survival rates.
         """
         print("\n=== EXECUTING ADAPTIVE UCB STRATEGY ===")
 
@@ -307,16 +318,19 @@ class UCBStrategy(MortyRescueStrategy):
         print(f"Morties Lost: {final_status['morties_lost']}")
         print(f"Success Rate: {(final_status['morties_on_planet_jessica']/total_morties)*100:.2f}%")
             
-class AdaptiveSurvivalStrategy(MortyRescueStrategy):
+
+# Score : [47%, 60%]
+# Review : This is the third optimized version of our adaptive strategy, focusing on dynamic morty sending and planet switching.
+# The scores were very unpredictable, we don't know why and could not stabilize them despite our efforts and time(we tried to develop also this stategy with some UCB in it, it didn't work).
     def execute_strategy(
         self,
         window_size=8,
         reevaluate_every=30,
         exploration_cycle=100,
         switch_threshold=0.45,
-        save_csv="adaptive_results_v3.csv"
+        save_csv="outputs/data/adaptive_results.csv"
     ):
-        print("\n=== EXECUTING ADAPTIVE SURVIVAL STRATEGY v3 (Optimized) ===")
+        print("\n=== EXECUTING ADAPTIVE SURVIVAL STRATEGY ===")
         
         status = self.client.get_status()
         morties_remaining = status['morties_in_citadel']
@@ -357,7 +371,7 @@ class AdaptiveSurvivalStrategy(MortyRescueStrategy):
             recent_results.append(survived / morties_to_send)
             total_trips += 1
 
-            print(f"Trip {total_trips}: Sent {morties_to_send} → survived={survived} | recent={recent_success:.2f}")
+            print(f"Trip {total_trips}: Sent {morties_to_send} -> survived={survived} | recent={recent_success:.2f}")
 
             planet_reevaluated = False
 
@@ -411,6 +425,120 @@ class AdaptiveSurvivalStrategy(MortyRescueStrategy):
         print(f"Lost:  {final['morties_lost']}")
         print(f"Success rate: {saved/1000:.2%}")
 
+
+
+# Score : [47%, 64%]
+# Review : This is the third optimized version of our adaptive strategy, focusing on dynamic morty sending and planet switching.
+# The scores were very unpredictable, we don't know why and could not stabilize them despite our efforts and time(we tried to develop also this stategy with some UCB in it, it didn't work).
+class AdaptiveSurvivalStrategy(MortyRescueStrategy):
+    def execute_strategy(
+        self,
+        window_size=8,
+        reevaluate_every=30,
+        exploration_cycle=100,
+        switch_threshold=0.45,
+        save_csv="adaptive_results_v3.csv"
+    ):
+        print("\n=== EXECUTING ADAPTIVE SURVIVAL STRATEGY v3 (Optimized) ===")
+        
+        status = self.client.get_status()
+        morties_remaining = status['morties_in_citadel']
+
+        # Start on the historically best planet
+        current_planet, current_planet_name = self.collector.get_best_planet(
+            self.exploration_data, consider_trend=True
+        )
+        print(f"Starting on {current_planet_name}")
+
+        recent_results = deque(maxlen=window_size)
+        total_trips = 0
+        reevaluation_cooldown = 0
+
+        csv_rows = [["Trip", "Planet", "MortiesSent", "Survived", "Rate", "PlanetReevaluated"]]
+
+        while morties_remaining > 0:
+
+            # stable + reactive recent rate
+            if len(recent_results) > 0:
+                recent_success = sum(recent_results) / len(recent_results)
+            else:
+                recent_success = 0.55  # neutral and optimistic start
+
+            # --- decision on morties to send ---
+            if recent_success >= 0.65:
+                morties_to_send = min(3, morties_remaining)
+            elif recent_success >= 0.40:
+                morties_to_send = min(2, morties_remaining)
+            else:
+                morties_to_send = 1
+
+            # --- send morties ---
+            result = self.client.send_morties(current_planet, morties_to_send)
+            survived = result["survived"]
+            morties_remaining = result["morties_in_citadel"]
+
+            recent_results.append(survived / morties_to_send)
+            total_trips += 1
+
+            print(f"Trip {total_trips}: Sent {morties_to_send} -> survived={survived} | recent={recent_success:.2f}")
+
+            planet_reevaluated = False
+
+            # --- forced exploration every X trips ---
+            if total_trips % exploration_cycle == 0:
+                print("\nExploration cycle")
+                new_planet, new_name = self.collector.get_best_planet(self.exploration_data, consider_trend=True)
+                current_planet = new_planet
+                current_planet_name = new_name
+                planet_reevaluated = True
+                reevaluation_cooldown = 15
+
+            # --- periodic performance check ---
+            if total_trips % reevaluate_every == 0 and reevaluation_cooldown == 0:
+                window_perf = sum(recent_results) / len(recent_results)
+                print(f"-> Reevaluating: window perf = {window_perf:.2f}")
+
+                if window_perf < switch_threshold:
+                    print("Performance below threshold -> switching planet")
+                    new_planet, new_name = self.collector.get_best_planet(self.exploration_data, consider_trend=True)
+                    current_planet = new_planet
+                    current_planet_name = new_name
+                    planet_reevaluated = True
+                    reevaluation_cooldown = 15
+
+            # --- optional boost for planet 2 (if it's historically best in your game) ---
+            if current_planet == 2 and total_trips % 50 == 0:
+                print("Returning to planet 2 as a boost strategy")
+
+            # --- log CSV ---
+            csv_rows.append([
+                total_trips,
+                current_planet_name,
+                morties_to_send,
+                survived,
+                survived / morties_to_send,
+                planet_reevaluated
+            ])
+
+        # save CSV
+        with open(save_csv, "w", newline="") as f:
+            csv.writer(f).writerows(csv_rows)
+
+        print(f"\nResults saved to {save_csv}")
+
+        # final stats
+        final = self.client.get_status()
+        saved = final["morties_on_planet_jessica"]
+        print("\n=== FINAL RESULTS ===")
+        print(f"Saved: {saved}")
+        print(f"Lost:  {final['morties_lost']}")
+        print(f"Success rate: {saved/1000:.2%}")
+
+
+
+# Score : [68%, 73.6%]
+# Review : This strategy uses Thompson Sampling with cyclic phases to adaptively choose planets and morty counts.
+# It works well by capturing periodic changes in planet survival rates.
 class ThompsonCyclicStrategy(MortyRescueStrategy):
     """
     Thompson Sampling strategy with cyclic phases for each planet.
@@ -507,6 +635,7 @@ class ThompsonCyclicStrategy(MortyRescueStrategy):
         print(f"Success Rate: {success_pct:.2f}%")
 
 
+
 def run_strategy(strategy_class, explore_trips: int = 30):
     """
     Run a complete strategy from exploration to execution.
@@ -537,6 +666,7 @@ def run_strategy(strategy_class, explore_trips: int = 30):
     strategy.execute_strategy()
 
 
+
 if __name__ == "__main__":
     print("Morty Express Challenge - Strategy Module")
     print("="*60)
@@ -558,3 +688,33 @@ if __name__ == "__main__":
     # Uncomment to run:
     # run_strategy(AdaptiveStrategy, explore_trips=30)
 
+
+"""
+Pour commencer ce projet, nous avons d'abord testé les stratégies données de départ, nous avons observé des scores plutôt prometteurs, 
+même si elles restent faibles. Pour mieux comprendre le fonctionnement des planètes et leurs variations, nous avons implémenté une phase d'exploration.
+Durant cette phase, nous avons essayé de générer un maximum de fichiers csv pour analyser les données, et de visualiser des résultats à l'aide du fichier
+visualizations.py. Malheureusement, nous n'avons pas réussi à correctement interpréter ces résultats, nous sommes également passées par la création de
+notre fichier de visualisation mais sans succès. Ce que nous avons fait c'est de passer les fichiers csv à un chat pour qu'il nous aide à 
+comprendre la multitude de données obtenues. Heuresement pour nous, dans le discord de la classe nous avons eu la connaissance des périodes de chaque
+planète, ce qui nous a permis de mieux comprendre les variations des planètes. 
+Notre deuxième phase de dévéloppement a été la création de plusieurs stratégies basées sur certaines notions de cours. Nous avons commencé par améliorer 
+la stratégie AdaptiveStrategy en y ajoutant une phase d'exploration et en implémentant un système de changement de planète lorsque la performance
+de la planète actuelle devient trop faible. Malgrè ce premier ajout les résultats n'étaient pas satisfaisants. Le score obtenu n'était pas foncièrement
+meilleur et surtout très instable(on a observé que cette instabilité dépendait en partie par le choix de la première planète explorée, nous obtenions
+de meilleurs résultats en commençant par la planète Purge). Graçe aux fréquences, nous avons continué d'adpater notre stratégie. Malheureusement, malgrè
+nos nombreux essais, nous n'avons jamais eu de vrais améliorations(plus on avancé, plus nos résultats devenaient inprevisibles). Nous avons donc décidé
+de suivre vos conseils et de tenter d'implémenter une stratégie basée sur l'algorithme UCB. Nous avons réussi à implémenter cette stratégie UCBStrategy,
+mais les résultats n'étaient pas tellement meilleurs que ceux de notre stratégie Adaptive. Une des méthodes que nous avons testé en termes de tests était
+de collecter des fichiers csv run de chaque stratégie faite et de les passer à un chatbot pour qu'il nous aide à analyser les données et à nous suggérer 
+des améliorations et surtout comprendre les différeces entre nos runs et ce qui a impacté notre performance. Cette méthode nous a permis d'améliorer 
+certains détails dans nos stratégies, mais nous n'avons jamais réussi à stabiliser nos scores.
+Après nos multitudes essais d'améliorations, nous avons enfin décidé à chercher une nouvelle stratégie plus adaptée. Lors de nos recherches nous sommes 
+tombées sur ThompsonCyclicStrategy. Cette stratégie est basée sur l'algorithme de Thompson Sampling, cela nous permet d'avoir une approche bayésienne pour
+la sélection des planètes. De plus, l'aspect cyclique de la stratégie nous permet d'explorer les différentes phases de chaque planète, en adaptant notre 
+choix en fonction des variations périodiques. Nous avons implémenté cette stratégie et nous avons observé des résultats plus stables et prometteurs. 
+Notre objectif avec ce projet était d'atteindre un score au-dessus de 70%, c'est chose faite avec cette stratégie.
+Si nous avions plus de temps, nous aurions aimé travailler sur la visualisation des données pour mieux comprendre les variations des planètes et pour
+afficher nos résultats après nos runs, pour ne pas à avoir à analyser des fichiers csv(nous avons essayé d'utiliser le fichier de visualisation existant,
+mais nous n'avons pas réussi à comprendre et l'adapter à nos besoins, du moins pas suffisamment pour en tirer des conclusions utilisables).
+Nous avons également de la chance que les périodes des planètes nous ont été données.
+"""

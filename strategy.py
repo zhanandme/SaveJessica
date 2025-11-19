@@ -340,6 +340,7 @@ class UCBStrategy(MortyRescueStrategy):
             
 
 
+
 # Score : [47%, 64%]
 # Review : This is the third optimized version of our adaptive strategy, focusing on dynamic morty sending and planet switching.
 # The scores were very unpredictable, we don't know why and could not stabilize them despite our efforts and time(we tried to develop also this stategy with some UCB in it, it didn't work).
